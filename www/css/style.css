@@ -1,0 +1,76 @@
+/* Empty. Add your own CSS if you like */
+.scroll-content{
+	background-image:url(../img/home_bg.jpg);
+	background-repeat:no-repeat;
+	background-size:cover;
+
+
+
+
+}
+
+ion-content{
+	direction:rtl;
+}
+
+
+
+#ar_profile article{
+	width:100%;
+	height:220px;
+	background-color:rgba(255,255,255,0.9);
+	margin:0px auto;
+	margin-bottom:6px;
+	padding:25px;
+	color:#909090;
+	text-align:right;
+}
+
+ion-content #ar_profile article h1 {
+	font-weight:bold;
+	font-size:48px;
+	display:block;
+	width:900px;
+}
+
+#ar_profile article h2{
+
+	font-size:40px;
+	display:block;
+	width:900px;
+}
+
+
+ion-view{
+	height:auto;
+	min-height:500px;
+	text-align:center;
+}
+
+
+
+
+.button-calm{
+
+	border-radius:45%;
+	width:56px;
+	height:56px;
+	position:fixed;
+	top:85%;
+	left:74%;
+	 box-shadow: 0 5px 2px -2px rgba(0,0,0,0.2);
+
+
+}
+
+.ion-plus-round, .ion-person-add, .ion-compose {
+  font-size: 1.2em;
+}
+
+
+
+
+
+
+
+
