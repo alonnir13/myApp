@@ -1,0 +1,127 @@
+<ion-view view-title="Dashboard">
+  <div class="tabs tabs-icon-only">
+    <a class="tab-item"
+       data-ng-class="{active: dashboard.activeIndexView === 0}"
+       data-ng-click="dashboard.slideTo(2)">
+      <i class="icon ion-ios-pulse-strong" data-ng-show="dashboard.activeIndexView === 2"></i>
+      <i class="icon ion-ios-pulse" data-ng-show="dashboard.activeIndexView !== 2"></i>
+    </a>
+    <a class="tab-item"
+       data-ng-class="{active: dashboard.activeIndexView === 1}"
+       data-ng-click="dashboard.slideTo(1)">
+      <i class="icon ion-ios-chatboxes" data-ng-show="dashboard.activeIndexView === 1"></i>
+      <i class="icon ion-ios-chatboxes-outline" data-ng-show="dashboard.activeIndexView !== 1"></i>
+    </a>
+    <a class="tab-item"
+       data-ng-class="{active: dashboard.activeIndexView === 2}"
+       data-ng-click="dashboard.slideTo(0)">
+      <i class="icon ion-ios-gear" data-ng-show="dashboard.activeIndexView === 0"></i>
+      <i class="icon ion-ios-gear-outline" data-ng-show="dashboard.activeIndexView !== 0"></i>
+    </a>
+  </div>
+
+  <ion-content class="padding">
+    <ion-slides options="{keyboardControl: true, initialSlide: 2}" slider="dashboard.slider">
+      <!-- status view -->
+      <!-- account view -->
+      <ion-slide-page>
+        <ion-list data-ng-controller="AccountCtrl">
+          <ion-toggle ng-model="settings.enableFriends">
+            Enable Friends
+          </ion-toggle>
+        </ion-list>
+        <button class="button button-calm "><i class="ion-compose"></i></button>
+      </ion-slide-page>
+
+
+      <!-- chat view -->
+      <ion-slide-page>
+        <div>
+        <ion-list data-ng-controller="ChatsCtrl">
+          <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats"
+                    type="item-text-wrap" href="#/chats/{{chat.id}}">
+            <img ng-src="{{chat.face}}">
+            <h2>{{chat.name}}</h2>
+            <p>{{chat.lastText}}</p>
+            <i class="icon ion-chevron-right icon-accessory"></i>
+
+            <ion-option-button class="button-assertive" ng-click="remove(chat)">
+              Delete
+            </ion-option-button>
+          </ion-item>
+        </ion-list>
+        <button class="button button-calm "><i class="ion-person-add"></i></button>
+        </div>
+      </ion-slide-page>
+
+      <!--Profile-->
+      <ion-slide-page>
+        <ion-content  class="padding">
+
+        <!--profile-->
+        <div class="row" id="ar_profile">
+          <article class="col col-100">
+            <p>סוכן:משה אטס</p>
+            <p>סוג הנכס: פנטהוז</p>
+            <p>כתובת: אליעזר בן יהודה 19, באר שבע</p>
+            <p>מספר חדרים: 5</p>
+            <p>מחיר: 980,000 ש”ח</p>
+            <p>קומה:12</p>
+
+
+          </article>
+
+        </div>
+
+
+        <div class="row" id="ar_profile">
+          <article class="col col-100">
+            <p>סוכן:משה אטס</p>
+            <p>סוג הנכס: פנטהוז</p>
+            <p>כתובת: אליעזר בן יהודה 19, באר שבע</p>
+            <p>מספר חדרים: 5</p>
+            <p>מחיר: 980,000 ש”ח</p>
+            <p>קומה:12</p>
+
+
+          </article>
+
+        </div>
+
+        <div class="row" id="ar_profile">
+          <article class="col col-100">
+            <p>סוכן:משה אטס</p>
+            <p>סוג הנכס: פנטהוז</p>
+            <p>כתובת: אליעזר בן יהודה 19, באר שבע</p>
+            <p>מספר חדרים: 5</p>
+            <p>מחיר: 980,000 ש”ח</p>
+            <p>קומה:12</p>
+
+
+          </article>
+
+        </div>
+        <div class="row" id="ar_profile">
+          <article class="col col-100">
+            <p>סוכן:משה אטס</p>
+            <p>סוג הנכס: פנטהוז</p>
+            <p>כתובת: אליעזר בן יהודה 19, באר שבע</p>
+            <p>מספר חדרים: 5</p>
+            <p>מחיר: 980,000 ש”ח</p>
+            <p>קומה:12</p>
+
+
+          </article>
+
+        </div>
+
+  </ion-content>
+        <button class="button button-calm " ng-click="openModal()"><i class="ion-plus-round"></i></button>
+
+      </ion-slide-page>
+
+
+    </ion-slides>
+
+  </ion-content>
+</ion-view>
