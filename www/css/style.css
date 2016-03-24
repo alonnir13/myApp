@@ -3,10 +3,20 @@
 	background-image:url(../img/home_bg.jpg);
 	background-repeat:no-repeat;
 	background-size:cover;
+}
 
-
-
-
+.scroll{
+  height:100%;
+}
+.swiper-pagination {
+  display: none;
+}
+.swiper-container {
+  overflow-x:hidden;
+  overflow-y:scroll;
+}
+.scroll-content {
+  margin-bottom: 42px;
 }
 
 ion-content{
@@ -55,7 +65,7 @@ ion-view{
 	border-radius:45%;
 	width:56px;
 	height:56px;
-	position:fixed;
+	position:absolute;
 	top:85%;
 	left:74%;
 	 box-shadow: 0 5px 2px -2px rgba(0,0,0,0.2);
