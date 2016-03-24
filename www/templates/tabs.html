@@ -3,22 +3,65 @@ Create tabs with an icon and label, using the tabs-positive style.
 Each tab's child <ion-nav-view> directive will have its own
 navigation history that also transitions its views in and out.
 -->
+
 <ion-tabs class="tabs-icon-top tabs-color-active-calm">
 
   <!-- Dashboard Tab -->
-  <ion-tab title="פרופיל אישי" icon-off="ion-ios-person-outline" icon-on="ion-ios-person" href="#/tab/dash">
+  <ion-tab on-swipe-left=$state.go(chats.html); nav-transition="ios" title="פרופיל אישי" icon-off="ion-ios-person-outline" icon-on="ion-ios-person" href="#/tab/dash">
     <ion-nav-view name="tab-dash"></ion-nav-view>
   </ion-tab>
 
   <!-- Chats Tab -->
-  <ion-tab title="אנשי קשר" icon-off="ion-ios-telephone-outline" icon-on="ion-ios-telephone" href="#/tab/chats">
+  <ion-tab nav-transition="ios" title="אנשי קשר" icon-off="ion-ios-telephone-outline" icon-on="ion-ios-telephone" href="#/tab/chats">
     <ion-nav-view name="tab-chats"></ion-nav-view>
   </ion-tab>
 
   <!-- Account Tab -->
-  <ion-tab title="משימות" icon-off="ion-ios-list-outline" icon-on="ion-ios-list" href="#/tab/account">
+  <ion-tab nav-transition="ios" title="משימות" icon-off="ion-ios-list-outline" icon-on="ion-ios-list" href="#/tab/account">
     <ion-nav-view name="tab-account"></ion-nav-view>
   </ion-tab>
 
 
-</ion-tabs>
+<!--</ion-tabs>-->
+<ion-view view-title="Dashboard">
+  <div class="tabs tabs-icon-only">
+    <a class="tab-item"
+       data-ng-class="{active: dashboard.activeIndexView === 0}"
+       data-ng-click="dashboard.slideTo(0)">
+      <i class="icon ion-ios-pulse-strong" data-ng-show="dashboard.activeIndexView === 0"></i>
+      <i class="icon ion-ios-pulse" data-ng-show="dashboard.activeIndexView !== 0"></i>
+    </a>
+    <a class="tab-item"
+       data-ng-class="{active: dashboard.activeIndexView === 1}"
+       data-ng-click="dashboard.slideTo(1)">
+      <i class="icon ion-ios-chatboxes" data-ng-show="dashboard.activeIndexView === 1"></i>
+      <i class="icon ion-ios-chatboxes-outline" data-ng-show="dashboard.activeIndexView !== 1"></i>
+    </a>
+    <a class="tab-item"
+       data-ng-class="{active: dashboard.activeIndexView === 2}"
+       data-ng-click="dashboard.slideTo(2)">
+      <i class="icon ion-ios-gear" data-ng-show="dashboard.activeIndexView === 2"></i>
+      <i class="icon ion-ios-gear-outline" data-ng-show="dashboard.activeIndexView !== 2"></i>
+    </a>
+  </div>
+
+  <ion-slides options="{keyboardControl: true, initialSlide: 0}" slider="dashboard.slider" class="tabs-icon-top tabs-color-active-calm">
+
+  <!-- Dashboard Tab -->
+  <ion-slide-page on-swipe-left=$state.go(chats.html); nav-transition="ios" title="פרופיל אישי" icon-off="ion-ios-person-outline" icon-on="ion-ios-person" href="#/tab/dash">
+    <ion-nav-view name="tab-dash"></ion-nav-view>
+  </ion-slide-page>
+
+  <!-- Chats Tab -->
+  <ion-slide-page nav-transition="ios" title="אנשי קשר" icon-off="ion-ios-telephone-outline" icon-on="ion-ios-telephone" href="#/tab/chats">
+    <ion-nav-view data-ng-controller="ChatsCtrl" name="tab-chats"></ion-nav-view>
+  </ion-slide-page>
+
+  <!-- Account Tab -->
+  <ion-slide-page nav-transition="ios" title="משימות" icon-off="ion-ios-list-outline" icon-on="ion-ios-list" href="#/tab/account">
+    <ion-nav-view name="tab-account"></ion-nav-view>
+  </ion-slide-page>
+
+
+</ion-slides>
+</ion-view>

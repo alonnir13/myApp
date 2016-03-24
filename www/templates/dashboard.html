@@ -1,37 +1,46 @@
-<ion-view view-title="Dashboard">
-  <div class="tabs tabs-icon-only">
-    <a class="tab-item"
+<ion-view title="פרופיל">
+  <div style="position:absolute;top: 40px;" class="tabs tabs-icon-top tabs-color-active-calm">
+    <a class="tab-item" title="פרופיל אישי"
        data-ng-class="{active: dashboard.activeIndexView === 0}"
        data-ng-click="dashboard.slideTo(2)">
-      <i class="icon ion-ios-pulse-strong" data-ng-show="dashboard.activeIndexView === 2"></i>
-      <i class="icon ion-ios-pulse" data-ng-show="dashboard.activeIndexView !== 2"></i>
+      <i title="פרופיל אישי"  class="icon ion-ios-person custom-icon" data-ng-show="dashboard.activeIndexView === 2"></i>
+      <i title="פרופיל אישי"  class="icon ion-ios-person-outline" data-ng-show="dashboard.activeIndexView !== 2"></i>
+      פרופיל אישי
     </a>
-    <a class="tab-item"
+    <a class="tab-item tab-item-color-calm tab-item-active-calm"
        data-ng-class="{active: dashboard.activeIndexView === 1}"
        data-ng-click="dashboard.slideTo(1)">
-      <i class="icon ion-ios-chatboxes" data-ng-show="dashboard.activeIndexView === 1"></i>
+      <i class="icon ion-ios-chatboxes custom-icon" data-ng-show="dashboard.activeIndexView === 1"></i>
       <i class="icon ion-ios-chatboxes-outline" data-ng-show="dashboard.activeIndexView !== 1"></i>
+רשימות
     </a>
     <a class="tab-item"
        data-ng-class="{active: dashboard.activeIndexView === 2}"
        data-ng-click="dashboard.slideTo(0)">
-      <i class="icon ion-ios-gear" data-ng-show="dashboard.activeIndexView === 0"></i>
-      <i class="icon ion-ios-gear-outline" data-ng-show="dashboard.activeIndexView !== 0"></i>
+      <i class="icon ion-ios-gear custom-icon" data-ng-show="dashboard.activeIndexView === 0"></i>
+      <i class="icon ion-ios-gear-outline " data-ng-show="dashboard.activeIndexView !== 0"></i>
+      אנשי קשר
     </a>
   </div>
 
-  <ion-content class="padding">
+  <!--<ion-tabs class="tabs-icon-top tabs-color-active-calm">-->
+
+    <!--&lt;!&ndash; Dashboard Tab &ndash;&gt;-->
+    <!--<ion-tab  data-ng-show="dashboard.activeIndexView === 0" data-ng-class="{active: dashboard.activeIndexView === 0}" data-ng-click="dashboard.slideTo(2)" title="פרופיל אישי" icon-off="ion-ios-person-outline" icon-on="ion-ios-person" href="#/tab/dash">-->
+    <!--</ion-tab>-->
+
+    <!--&lt;!&ndash; Chats Tab &ndash;&gt;-->
+    <!--<ion-tab  data-ng-show="dashboard.activeIndexView === 1" data-ng-class="{active: dashboard.activeIndexView === 1}" data-ng-click="dashboard.slideTo(1)"  title="אנשי קשר" icon-off="ion-ios-telephone-outline" icon-on="ion-ios-telephone" href="#/tab/chats">-->
+    <!--</ion-tab>-->
+
+    <!--&lt;!&ndash; Account Tab &ndash;&gt;-->
+    <!--<ion-tab data-ng-show="dashboard.activeIndexView === 2"  data-ng-class="{active: dashboard.activeIndexView === 2}" data-ng-click="dashboard.slideTo(0)"  title="משימות" icon-off="ion-ios-list-outline" icon-on="ion-ios-list" href="#/tab/account">-->
+    <!--</ion-tab>-->
+    <!--</ion-tabs>-->
+
+  <ion-content>
     <ion-slides options="{keyboardControl: true, initialSlide: 2}" slider="dashboard.slider">
       <!-- status view -->
-      <!-- account view -->
-      <ion-slide-page>
-        <ion-list data-ng-controller="AccountCtrl">
-          <ion-toggle ng-model="settings.enableFriends">
-            Enable Friends
-          </ion-toggle>
-        </ion-list>
-        <button class="button button-calm "><i class="ion-compose"></i></button>
-      </ion-slide-page>
 
 
       <!-- chat view -->
@@ -54,9 +63,21 @@
         </div>
       </ion-slide-page>
 
+
+      <!-- account view -->
+      <ion-slide-page>
+        <ion-list data-ng-controller="AccountCtrl">
+          <ion-toggle ng-model="settings.enableFriends">
+            Enable Friends
+          </ion-toggle>
+        </ion-list>
+        <button class="button button-calm "><i class="ion-compose"></i></button>
+      </ion-slide-page>
+
+
       <!--Profile-->
       <ion-slide-page>
-        <ion-content  class="padding">
+        <ion-content style="margin-top: 0px">
 
         <!--profile-->
         <div class="row" id="ar_profile">
