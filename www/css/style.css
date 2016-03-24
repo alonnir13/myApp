@@ -4,6 +4,15 @@
 	background-repeat:no-repeat;
 	background-size:cover;
 }
+.custom-icon{
+  font-size: 64px;
+ color: #11c1f3;
+}
+
+.bar-light{
+  z-index: 1;
+
+}
 
 .scroll{
   height:100%;
@@ -13,10 +22,10 @@
 }
 .swiper-container {
   overflow-x:hidden;
-  overflow-y:scroll;
+  /*overflow-y:scroll;*/
 }
 .scroll-content {
-  margin-bottom: 42px;
+  margin-top: 42px;
 }
 
 ion-content{
@@ -49,6 +58,7 @@ ion-content #ar_profile article h1 {
 	display:block;
 	width:900px;
 }
+
 
 
 ion-view{
