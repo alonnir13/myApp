@@ -1,5 +1,49 @@
 angular.module('starter.services', [])
 
+  .service('LoginService', function($q, $http) {
+    return {
+      loginUser: function(name, pw, localStorageService) {
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+        var req = {
+          method: 'POST',
+          url: 'http://ec2-52-36-182-79.us-west-2.compute.amazonaws.com/login/validate_User',
+          //dataType: "json",
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+          },
+          data: "username=lirond101&password=rnadal101"
+        }
+
+
+        $http(req).then(function(){
+          deferred.resolve('Welcome ' + name + '!');
+        console.log("success  login");
+        },
+          function(){
+            deferred.reject('Wrong credentials.');
+            console.log("Faild to login " + status + " data: " + data);
+
+          });
+        //if (name == 'user' && pw == 'secret') {
+        //  deferred.resolve('Welcome ' + name + '!');
+        //} else {
+        //  deferred.reject('Wrong credentials.');
+        //}
+        promise.success = function(fn) {
+          promise.then(fn);
+          return promise;
+        }
+        promise.error = function(fn) {
+          promise.then(null, fn);
+          return promise;
+        }
+        return promise;
+      }
+    }
+  })
+
+
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
 

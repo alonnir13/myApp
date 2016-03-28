@@ -46,6 +46,27 @@ angular.module('starter.controllers', [])
     $scope.chat = Chats.get($stateParams.chatId);
   })
 
+  .controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state, localStorageService) {
+    $scope.data = {};
+
+    if(localStorageService.get("isLoggedIn")){
+      $state.go('dashboard');
+    }
+
+    $scope.login = function() {
+      console.log("LOGIN user: " + $scope.data.username + " - PW: " + $scope.data.password);
+      LoginService.loginUser($scope.data.username, $scope.data.password, localStorageService).success(function(data) {
+        localStorageService.set("isLoggedIn", true);
+        $state.go('dashboard');
+      }).error(function(data) {
+        var alertPopup = $ionicPopup.alert({
+          title: 'Login failed!',
+          template: 'Please check your credentials!'
+        });
+      });
+    }
+  })
+
   .controller('AccountCtrl', function ($scope) {
     $scope.settings = {
       enableFriends: true

@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'LocalStorageModule'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -22,9 +22,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   });
 })
-  //.config(function($ionicConfigProvider){
-  //  $ionicConfigProvider.tabs.position('top');
-  //})
+  .config(function($ionicConfigProvider){
+    $ionicConfigProvider.tabs.position('top');
+  })
+
+.config(function (localStorageServiceProvider) {
+  localStorageServiceProvider
+    .setPrefix('data-provider');
+})
 .config(function($stateProvider, $urlRouterProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
@@ -98,8 +103,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       url: '/chats/:chatId',
       templateUrl: 'templates/chat-detail.html',
       controller: 'ChatDetailCtrl'
+    })
+    .state('login', {
+      url: '/login',
+      templateUrl: 'templates/login.html',
+      controller: 'LoginCtrl'
     });
-
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/dashboard');
 
