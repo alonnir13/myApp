@@ -1,7 +1,8 @@
 <ion-view view-title="אנשי קשר">
+
   <ion-content>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/chats/{{chat.id}}">
+     <button on-hold="show_sheet()"><ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/chats/{{chat.id}} on-">
         <img ng-src="{{chat.face}}">
         <h2>{{chat.name}}</h2>
         <p>{{chat.lastText}}</p>
@@ -10,14 +11,15 @@
         <ion-option-button class="button-assertive" ng-click="remove(chat)">
          <i class="ion-close-round" style="margin-right:6px;"></i>
         </ion-option-button>
-      </ion-item>
+      </ion-item></button>
     </ion-list>
 
 
 
   </ion-content>
 
-        <button class="button button-calm "><i class="ion-person-add"></i></button>
+
+        <button class="button button-calm"><i class="ion-person-add"></i></button>
 
 
 </ion-view>

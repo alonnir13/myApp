@@ -36,7 +36,11 @@ angular.module('starter.controllers', [])
     //$scope.$on('$ionicView.enter', function(e) {
     //});
 
+
+
     $scope.chats = Chats.all();
+
+
     $scope.remove = function (chat) {
       Chats.remove(chat);
     };
@@ -72,3 +76,37 @@ angular.module('starter.controllers', [])
       enableFriends: true
     };
   });
+
+angular.module('mySuperApp', ['ionic'])
+  .controller(function($scope, $ionicActionSheet, $timeout) {
+
+    // Triggered on a button click, or some other target
+    $scope.show_sheet = function() {
+
+      // Show the action sheet
+      var hideSheet = $ionicActionSheet.show_sheet({
+        buttons: [
+          { text: '<b>Share</b> This' },
+          { text: 'Move' }
+        ],
+        destructiveText: 'Delete',
+        titleText: 'Modify your album',
+        cancelText: 'Cancel',
+        cancel: function() {
+          // add cancel code..
+        },
+        buttonClicked: function(index) {
+          return true;
+        }
+      });
+
+      // For example's sake, hide the sheet after two seconds
+      $timeout(function() {
+        hideSheet();
+      }, 2000);
+
+    };
+  });
+
+
+
