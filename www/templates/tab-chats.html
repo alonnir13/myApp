@@ -2,7 +2,7 @@
 
   <ion-content>
     <ion-list>
-     <button on-hold="show_sheet()"><ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/chats/{{chat.id}} on-">
+    <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/chats/{{chat.id}} on-">
         <img ng-src="{{chat.face}}">
         <h2>{{chat.name}}</h2>
         <p>{{chat.lastText}}</p>
@@ -11,7 +11,7 @@
         <ion-option-button class="button-assertive" ng-click="remove(chat)">
          <i class="ion-close-round" style="margin-right:6px;"></i>
         </ion-option-button>
-      </ion-item></button>
+      </ion-item>
     </ion-list>
 
 
