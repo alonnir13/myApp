@@ -2,9 +2,12 @@
 ion-slides{
 	background-image:url(../img/home_bg.jpg);
 	background-repeat:no-repeat;
-	background-size:cover;
 
 }
+
+
+
+
 
 #chat_bg{
   background-image:url(../img/home_bg.jpg);
@@ -34,7 +37,7 @@ ion-slides{
   /*overflow-y:scroll;*/
 }
 .scroll-content , .list{
-  margin-top: 9%;
+  margin-top: 12%;
 }
 
 ion-content{
@@ -84,7 +87,7 @@ ion-view{
 
 
 
-.bar-light{
+.bar-clear{
 text-align: center;
  }
 
@@ -104,7 +107,7 @@ text-align: center;
 	border-radius:45%;
 	width:56px;
 	height:56px;
-	position:absolute;
+	position:fixed;
 	top:85%;
 	left:74%;
 	 box-shadow: 0 5px 2px -2px rgba(0,0,0,0.2);
@@ -112,8 +115,13 @@ text-align: center;
 
 }
 
+
 .ion-plus-round, .ion-person-add, .ion-compose {
   font-size: 1.2em;
+}
+
+.ion-search {
+  font-size: 1.5em;
 }
 
 .tab-item.tab-item-active, .tab-item.active, .tab-item.activated {
@@ -132,6 +140,25 @@ text-align: center;
   border: none !important;
 }
 
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+.item-input {
+  height: 40px;
+  z-index: 999;
+  direction: rtl;
+  width: 100%;
+  padding-right: 9%;
+  border-radius: 4px;
+}
+
+.bar{
+  overflow:hidden;
+}
 
 
 
