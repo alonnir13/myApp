@@ -37,7 +37,7 @@ ion-slides{
   /*overflow-y:scroll;*/
 }
 .scroll-content , .list{
-  margin-top: 12%;
+  margin-top: 10%;
 }
 
 ion-content{
@@ -95,9 +95,7 @@ text-align: center;
 
 
 
-.tabs-icon-top{
-  border-bottom: #b2b2b2 solid thin;
-}
+
 
 
 
@@ -159,6 +157,8 @@ text-align: center;
 .bar{
   overflow:hidden;
 }
+
+
 
 
 
