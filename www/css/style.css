@@ -2,6 +2,8 @@
 ion-slides{
 	background-image:url(../img/home_bg.jpg);
 	background-repeat:no-repeat;
+  background-size:cover;
+
 
 }
 
@@ -9,10 +11,11 @@ ion-slides{
 
 
 
-#chat_bg{
+#chat_bg, #filter_bg {
   background-image:url(../img/home_bg.jpg);
   background-repeat:no-repeat;
   background-size:cover;
+  width: 100%;
 }
 
 
@@ -150,8 +153,9 @@ text-align: center;
   z-index: 999;
   direction: rtl;
   width: 100%;
-  padding-right: 9%;
+  padding-right: 5%;
   border-radius: 4px;
+  border: none;
 }
 
 .bar{
