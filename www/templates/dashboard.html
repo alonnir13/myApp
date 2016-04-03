@@ -1,4 +1,12 @@
 <ion-view title="פרופיל">
+
+  <!--<label class="item item-input" class="col">-->
+    <!--<i class="icon ion-search placeholder-icon" ng-click="changeState()" ></i>-->
+  <!--</label>-->
+  <ion-nav-buttons side="primary">
+    <button class="button icon ion-search" ng-click="changeState()">
+    </button>
+  </ion-nav-buttons>
   <div style="position:absolute;top: 4%;" class="tabs tabs-icon-top tabs-color-active-calm">
     <a class="tab-item" title="פרופיל אישי"
        data-ng-class="{active: dashboard.activeIndexView === 0}"
@@ -39,7 +47,7 @@
     <!--</ion-tabs>-->
 
   <ion-content>
-    <ion-slides options="{keyboardControl: true, initialSlide: 2}" slider="dashboard.slider">
+    <ion-slides options="{keyboardControl: true, initialSlide: 0}" slider="dashboard.slider">
       <!-- status view -->
 
 

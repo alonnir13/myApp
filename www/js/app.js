@@ -104,6 +104,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       templateUrl: 'templates/chat-detail.html',
       controller: 'ChatDetailCtrl'
     })
+    .state('search', {
+      url: '/search',
+      templateUrl: 'templates/search.html',
+      controller: 'SearchCtrl'
+    })
     .state('login', {
       url: '/login',
       templateUrl: 'templates/login.html',

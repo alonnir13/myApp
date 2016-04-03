@@ -2,8 +2,13 @@ angular.module('starter.controllers', [])
 
   .controller('DashCtrl', function ($scope) {
   })
-  .controller('DashboardController', function ($scope) {
+  .controller('DashboardController', function ($scope, $state) {
     $scope.dashboard = {swiper: false, slider: false, activeIndexView: 2};
+
+    $scope.changeState = function () {
+      console.log("search");
+      $state.go('search');
+    };
 
     $scope.$watch('dashboard.slider', function (swiper) {
       if (swiper) {
@@ -70,13 +75,18 @@ angular.module('starter.controllers', [])
       });
     }
   })
+  .controller('SearchCtrl', function($scope, $state) {
+    //  TODO handle search
 
+  })
   .controller('AccountCtrl', function ($scope) {
     $scope.settings = {
       enableFriends: true
     };
   });
 
+
+// shit
 angular.module('mySuperApp', ['ionic'])
   .controller(function($scope, $ionicActionSheet, $timeout) {
 
