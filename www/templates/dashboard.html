@@ -77,12 +77,34 @@
 
       <!-- account view -->
       <ion-slide-page>
-        <ion-list data-ng-controller="AccountCtrl">
-          <ion-toggle ng-model="settings.enableFriends">
-            Enable Friends
-          </ion-toggle>
-        </ion-list>
-        <button class="button button-calm "><i class="ion-compose"></i></button>
+        <div  data-ng-controller="AccountCtrl" ng-init="getTasks()">
+          <ion-content>
+          <div class="list card" ng-repeat="task in tasks track by $index">
+            <div class="item item-divider">
+              <span ng-bind="task.title"></span>
+            </div>
+            <div class="item item-body">
+              <strong>Title: <span ng-bind="task.title"></span></strong>
+              <p>
+                <span ng-bind="task.content"></span>
+              </p>
+            </div>
+
+            <div class="item tabs tabs-secondary tabs-icon-left">
+                <span class="item item-checkbox">
+                    <label class="checkbox">
+                      <input type="checkbox" ng-model="task.completed" ng-click="completeTask($index)">
+                    </label>
+                </span>
+              <a class="tab-item assertive" ng-click="removeTask($index)">
+                <i class="icon ion-android-close"></i>
+              </a>
+            </div>
+
+          </div>
+          </ion-content>
+        <button ng-click="openTaskModal()" class="button button-calm assertive"><i class="ion-compose"></i></button>
+        </div>
       </ion-slide-page>
 
 
