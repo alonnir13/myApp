@@ -1,4 +1,4 @@
-angular.module('starter.services', [])
+angular.module('starter.services', ['ionic', 'LocalStorageModule'])
 
   .service('LoginService', function($q, $http) {
     return {
