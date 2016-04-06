@@ -55,6 +55,13 @@ angular.module('starter.controllers', [])
     $scope.chat = Chats.get($stateParams.chatId);
   })
 
+  .controller('ProfileCtrl', function($scope, $state, localStorageService) {
+    $scope.openUpload = function () {
+      console.log("upload");
+      $state.go('upload');
+    }
+  })
+
   .controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state, localStorageService) {
     $scope.data = {};
 
@@ -79,6 +86,10 @@ angular.module('starter.controllers', [])
     //  TODO handle search
 
   })
+  .controller('UploadCtrl', function($scope, $state) {
+  //  TODO handle upload
+  })
+
   .controller('AccountCtrl', function ($scope, $ionicModal, localStorageService) {
     var taskData = "taskStorage";
     //initialize the tasks scope with empty array
@@ -88,7 +99,7 @@ angular.module('starter.controllers', [])
     $scope.task = {};
 
     //configure the ionic modal before use
-    $ionicModal.fromTemplateUrl('new-task-modal.html', {
+    $ionicModal.fromTemplateUrl('templates/new-task-modal.html', {
       scope: $scope,
       animation: 'slide-in-up'
     }).then(function (modal) {

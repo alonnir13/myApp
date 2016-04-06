@@ -109,6 +109,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       templateUrl: 'templates/search.html',
       controller: 'SearchCtrl'
     })
+    .state('upload', {
+      url:'/upload',
+      templateUrl: 'templates/upload.html',
+      controller: 'UploadCtrl'
+    })
     .state('login', {
       url: '/login',
       templateUrl: 'templates/login.html',
