@@ -1,10 +1,90 @@
-<ion-view view-title="Filter" name="login-view">
-  <ion-content>
-    <div >
-      <label class="item item-input" class="col">
+<ion-view view-title="חפש נכסים" name="login-view" id="filter_bg">
+  <ion-content style="top: 1%;">
+      <label class="item item-input" class="row">
         <i class="icon ion-search placeholder-icon" ></i>
-        <input type="search" placeholder="חפש כתובת" autofocus keyboard-attach>
+        <input type="search" placeholder="חפש כתובת" autofocus keyboard-attach style="border: none; box-shadow: none;">
       </label>
-    </div>
+      <p style="margin-top: 5px;">או סנן לפי</p>
+
+      <label class="row">
+        <input  type="text" placeholder="שם הסוכן"  class="col" class="input_set">
+      </label>
+
+      <label class="row" style="margin-bottom: 25px">
+        <select name="agent" class="col">
+          <option >בן יהודה</option>
+          <option >שכונה ד'</option>
+          <option >שכונת סמרטוט ג'</option>
+          <option >קדש</option>
+        </select>
+      </label>
+
+
+    <label class="row" style="margin-bottom: 10px">
+      <div class="col-50" >
+      <select  name="assetType" >
+
+        <option >בית פרטי</option>
+        <option >דירה</option>
+        <option >פנטהאוז</option>
+      </select>
+        </div>
+
+      <div class="col-50" >
+      <select name="status" >
+        <option >נמכר</option>
+        <option >בשיווק</option>
+        <option >מושכר</option>
+
+      </select>
+        </div>
+    </label>
+
+
+    <label class="row" style="margin-bottom: 25px;">
+      <div class="col-50">
+      <input  type="text" placeholder="ממחיר"  class="input_set">
+      </div>
+      <div class="col-50">
+
+      <input  type="text" placeholder="מעד מחיר"  class="input_set">
+        </div>
+    </label>
+
+
+    <label class="row" style="margin-bottom: 25px;">
+      <div class="col-50">
+      <input  type="text" placeholder="ממקומה"  class="input_set">
+      </div>
+      <div class="col-50">
+
+      <input  type="text" placeholder="מעד קומה"  class="input_set">
+        </div>
+    </label>
+
+
+    <label class="row" style="margin-bottom: 25px;">
+      <input  type="text" placeholder="ממספר חדרים" class="col-100" class="input_set">
+    </label>
+
+
+    <label class="row" style="margin-bottom: 25px;">
+      <div class="col-30">
+    <ion-checkbox class="checkbox-dark" ng-model="isChecked.1">מעלית</ion-checkbox>
+        </div>
+      <div class="col-30">
+        <ion-checkbox class="checkbox-dark" ng-model="isChecked.2">מיזוג</ion-checkbox>
+      </div>
+      <div class="col-30">
+        <ion-checkbox class="checkbox-dark" ng-model="isChecked.3">ממ"ד</ion-checkbox>
+      </div>
+      </label>
+
+
+
   </ion-content>
+
+  <button full class="button button-calm button-search " >סנן</button>
+
+
 </ion-view>
