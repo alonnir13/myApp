@@ -2,11 +2,12 @@ angular.module('starter.controllers', [])
 
   .controller('DashCtrl', function ($scope) {
   })
-  .controller('DashboardController', function ($scope, $state) {
+  .controller('DashboardController', function ($scope, $state, $ionicViewSwitcher) {
     $scope.dashboard = {swiper: false, slider: false, activeIndexView: 2};
 
     $scope.changeState = function () {
       console.log("search");
+      //$ionicViewSwitcher.nextDirection('up');
       $state.go('search');
     };
 
@@ -32,7 +33,7 @@ angular.module('starter.controllers', [])
       $scope.swiper.slideTo(indexSlide);
     };
   })
-  .controller('ChatsCtrl', function ($scope, Chats, $ionicTabsDelegate) {
+  .controller('ChatsCtrl', function ($scope, Chats, $ionicModal,$ionicTabsDelegate) {
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
     // To listen for when this page is active (for example, to refresh data),
@@ -41,7 +42,36 @@ angular.module('starter.controllers', [])
     //$scope.$on('$ionicView.enter', function(e) {
     //});
 
+    $ionicModal.fromTemplateUrl('templates/new-contact-modal.html', {
+      scope: $scope,
+      animation: 'slide-in-up',
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
 
+    $scope.openModal = function() {
+      console.log("contact");
+      $scope.modal.show();
+    };
+
+    $scope.closeModal = function() {
+      $scope.modal.hide();
+    };
+
+    //Cleanup the modal when we're done with it!
+    $scope.$on('$destroy', function() {
+      $scope.modal.remove();
+    });
+
+    // Execute action on hide modal
+    $scope.$on('modal.hidden', function() {
+      // Execute action
+    });
+
+    // Execute action on remove modal
+    $scope.$on('modal.removed', function() {
+      // Execute action
+    });
 
     $scope.chats = Chats.all();
 
@@ -82,8 +112,13 @@ angular.module('starter.controllers', [])
       });
     }
   })
-  .controller('SearchCtrl', function($scope, $state) {
+  .controller('SearchCtrl', function($scope, $state, SearchService) {
     //  TODO handle search
+      $scope.submitSearch = function() {
+        var str = $("#form").serialize();
+        console.log("submit: " + str.toString());
+        SearchService.search(str).success(console.log("Good!!!!"));
+      }
 
   })
   .controller('UploadCtrl', function($scope, $state) {
