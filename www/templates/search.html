@@ -1,5 +1,6 @@
 <ion-view view-title="חפש נכסים" name="login-view" id="filter_bg">
   <ion-content style="top: 1%;">
+    <form role="form">
     <label class="item item-input" class="row" style="  box-shadow: 0 5px 4px -2px rgba(0,0,0,0.1);
 ">
       <i class="icon ion-search placeholder-icon" ></i>
@@ -8,6 +9,7 @@
     <p style="margin-top: 15px;">או סנן לפי</p>
 
     <label class="row">
+
       <input  type="text" placeholder="שם הסוכן"  class="col" class="input_set">
     </label>
 
@@ -68,18 +70,24 @@
       <input  type="text" placeholder="ממספר חדרים" class="col-100" class="input_set">
     </label>
 
-
-    <label class="row">
+<div  class="row">
+    <label>
       <div class="col-30">
         <ion-checkbox class="checkbox-dark" ng-model="isChecked.vlue1">מעלית</ion-checkbox>
       </div>
+      </label>
+      <label>
       <div class="col-30">
         <ion-checkbox class="checkbox-dark" ng-model="isCheckedvalue2">מיזוג</ion-checkbox>
       </div>
+        </label>
+      <label>
       <div class="col-30">
-        <ion-checkbox class="checkbox-dark" ng-model="isChecked.value3">ממ"ד</ion-checkbox>
+        <ion-checkbox class="checkbox-dark" ng-model="isChecked.value3"><p>ממ"ד </p></ion-checkbox>
       </div>
     </label>
+  </div>
+    </form>
 
 
 

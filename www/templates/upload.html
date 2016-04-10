@@ -1,4 +1,88 @@
-<ion-view>
+<ion-view view-title=  "העלה נכס" name="login-view" id="filter_bg">
+  <ion-content style="top: 1%; overflow: hidden;">
+    <form role="form">
+
+
+      <label class="row" style="margin-bottom: 10%; margin-top: 8%">
+
+        <input  type="text" placeholder="לפי שכונה" class="col" class="input_set">
+      </label>
+
+
+
+      <label class="row" style="margin-bottom: 6%;">
+        <div class="col-50" >
+          <select  name="assetType" >
+
+            <option >בית פרטי</option>
+            <option >דירה</option>
+            <option >פנטהאוז</option>
+          </select>
+        </div>
+
+        <div class="col-50" >
+          <select name="status" >
+            <option >נמכר</option>
+            <option >בשיווק</option>
+            <option >מושכר</option>
+
+          </select>
+        </div>
+      </label>
+
+
+      <label class="row" style="margin-bottom: 25px;">
+        <div class="col-30">
+          <input  type="text" placeholder="מס' חדרים "  class="input_set">
+        </div>
+        <div class="col-30">
+
+          <input  type="text" placeholder="מחיר "  class="input_set">
+        </div>
+
+
+        <div class="col-30">
+          <input  type="text" placeholder="קומה"  class="input_set">
+        </div>
+
+      </label>
+
+
+
+
+      <div  class="row">
+        <label>
+          <div class="col-30">
+            <ion-checkbox class="checkbox-dark" ng-model="isChecked.vlue1">מעלית</ion-checkbox>
+          </div>
+        </label>
+        <label>
+          <div class="col-30">
+            <ion-checkbox class="checkbox-dark" ng-model="isCheckedvalue2">מיזוג</ion-checkbox>
+          </div>
+        </label>
+        <label>
+          <div class="col-30">
+            <ion-checkbox class="checkbox-dark" ng-model="isChecked.value3"><p>ממ"ד </p></ion-checkbox>
+          </div>
+        </label>
+      </div>
+
+
+      <label class="row" style="margin-bottom: 25px;">
+        <textarea  type="text" placeholder="כתוב תיאור קצר " class="col" class="input_set"></textarea>
+      </label>
+
+      <button class="button button-calm takePic " ><i class="ion-ios-camera"></i></button>
+
+
+    </form>
+
+
+
+  </ion-content>
+
+  <button full class="button button-calm button-search " >סנן</button>
 
 
 </ion-view>
