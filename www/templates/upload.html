@@ -5,7 +5,7 @@
 
       <label class="row" style="margin-bottom: 10%; margin-top: 8%">
 
-        <input  type="text" placeholder="לפי שכונה" class="col" class="input_set">
+        <input  type="text" placeholder="שכונה " class="col" class="input_set">
       </label>
 
 
@@ -52,28 +52,32 @@
 
       <div  class="row">
         <label>
-          <div class="col-30">
-            <ion-checkbox class="checkbox-dark" ng-model="isChecked.vlue1">מעלית</ion-checkbox>
+          <p>מעלית</p>
+          <div class="col-33">
+            <ion-checkbox class="checkbox-dark" ng-model="isChecked.vlue1" ng-readonly="true"></ion-checkbox>
           </div>
         </label>
         <label>
-          <div class="col-30">
-            <ion-checkbox class="checkbox-dark" ng-model="isCheckedvalue2">מיזוג</ion-checkbox>
+          <p>מיזוג</p>
+          <div class="col-33">
+            <ion-checkbox class="checkbox-dark" ng-model="isCheckedvalue2" ng-readonly="true"></ion-checkbox>
           </div>
         </label>
         <label>
-          <div class="col-30">
-            <ion-checkbox class="checkbox-dark" ng-model="isChecked.value3"><p>ממ"ד </p></ion-checkbox>
+          <p>ממ"ד</p>
+          <div class="col-33">
+            <ion-checkbox class="checkbox-dark" ng-model="isChecked.value3" ng-readonly="true"></ion-checkbox>
           </div>
         </label>
       </div>
+
 
 
       <label class="row" style="margin-bottom: 25px;">
         <textarea  type="text" placeholder="כתוב תיאור קצר " class="col" class="input_set"></textarea>
       </label>
 
-      <button class="button button-calm takePic " ><i class="ion-ios-camera"></i></button>
+      <button class="button button-calm takePic " ><i class="ion-ios-camera" ></i></button>
 
 
     </form>

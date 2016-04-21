@@ -1,20 +1,22 @@
-<ion-modal-view>
-  <ion-header-bar class="bar-dark">
-    <h1 class="title">Create a new Task</h1>
+<ion-modal-view >
+  <ion-header-bar class="bar-light" id="modal_bg">
+    <h1 class="title">צור משימה חדשה</h1>
     <button class="button button-icon" ng-click="closeTaskModal()">
       <i class="icon ion-android-close"></i>
     </button>
   </ion-header-bar>
-  <ion-content>
+  <ion-content style="overflow: hidden;">
     <form ng-submit="createTask()">
       <div class="list list-inset">
         <label class="item item-input">
-          <input ng-model="task.title" type="text" placeholder="Task title">
+          <input ng-model="task.title" type="text" placeholder="Task title" autofocus>
         </label>
         <label class="item item-input">
-          <textarea ng-model="task.content" rows="5" placeholder="Task content"></textarea>
+          <textarea ng-model="task.content" rows="5" placeholder="Task content" style="box-shadow: none;"></textarea>
+          <button type="submit" class=" btns2 button-search-modal button button-block button-calm">צור משימה</button>
+
         </label>
-        <ul class="list">
+       <!-- <ul class="list">
           <li class="item item-toggle">
             Completed?
             <label class="toggle toggle-balanced">
@@ -24,9 +26,9 @@
               </div>
             </label>
           </li>
-        </ul>
-        <button type="submit" class="button button-block button-positive">Create Task</button>
+        </ul>-->
       </div>
+
     </form>
   </ion-content>
 </ion-modal-view>

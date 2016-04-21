@@ -4,7 +4,7 @@
     <label class="item item-input" class="row" style="  box-shadow: 0 5px 4px -2px rgba(0,0,0,0.1);
 ">
       <i class="icon ion-search placeholder-icon" ></i>
-      <input type="search" placeholder="חפש כתובת" autofocus keyboard-attach style="border: none; box-shadow: none;">
+      <input type="search" placeholder="חפש כתובת" autofocus keyboard-attach style="border: none; box-shadow: none; position: fixed;">
     </label>
     <p style="margin-top: 15px;">או סנן לפי</p>
 
@@ -66,27 +66,32 @@
     </label>
 
 
-    <label class="row" style="margin-bottom: 25px;">
+    <label  class="row" style="margin-bottom: 25px;">
       <input  type="text" placeholder="ממספר חדרים" class="col-100" class="input_set">
     </label>
 
-<div  class="row">
-    <label>
-      <div class="col-30">
-        <ion-checkbox class="checkbox-dark" ng-model="isChecked.vlue1">מעלית</ion-checkbox>
-      </div>
-      </label>
-      <label>
-      <div class="col-30">
-        <ion-checkbox class="checkbox-dark" ng-model="isCheckedvalue2">מיזוג</ion-checkbox>
-      </div>
+      <div  class="row">
+        <label>
+          <p>מעלית</p>
+          <div class="col-33">
+            <ion-checkbox class="checkbox-dark" ng-model="isChecked.vlue1" ng-readonly="true"></ion-checkbox>
+          </div>
         </label>
-      <label>
-      <div class="col-30">
-        <ion-checkbox class="checkbox-dark" ng-model="isChecked.value3"><p>ממ"ד </p></ion-checkbox>
+        <label>
+          <p>מיזוג</p>
+          <div class="col-33">
+            <ion-checkbox class="checkbox-dark" ng-model="isCheckedvalue2" ng-readonly="true"></ion-checkbox>
+          </div>
+        </label>
+        <label>
+          <p>ממ"ד</p>
+          <div class="col-33">
+            <ion-checkbox class="checkbox-dark" ng-model="isChecked.value3" ng-readonly="true"></ion-checkbox>
+          </div>
+        </label>
       </div>
-    </label>
-  </div>
+
+
     </form>
 
 

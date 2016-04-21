@@ -69,7 +69,7 @@
 
           </ion-item>
         </ion-list>
-        <button class="button button-calm " ><i class="ion-person-add"></i></button>
+        <button class="btns button button-calm button-md " ><i class="ion-person-add"></i></button>
         </div>
         </ino-content>
       </ion-slide-page>
@@ -103,7 +103,7 @@
 
           </div>
           </ion-content>
-        <button ng-click="openTaskModal()" class="button button-calm assertive"><i class="ion-compose"></i></button>
+        <button ng-click="openTaskModal()" class="btns button button-calm assertive"><i class="ion-compose"></i></button>
         </div>
       </ion-slide-page>
 
@@ -114,7 +114,7 @@
         <ion-content id="ar_profile">
 
         <!--profile-->
-        <div class="row" >
+        <div class="row" ng-click="goToAssetPage()" >
           <article class="col col-100">
             <p>סוכן:משה אטס</p>
             <p>סוג הנכס: פנטהוז</p>
@@ -171,7 +171,7 @@
         </div>
 
   </ion-content>
-        <button class="button button-calm " ng-click="openUpload()"><i class="ion-plus-round"></i></button>
+        <button class="button button-calm btns " ng-click="openUpload()"><i class="ion-plus-round"></i></button>
         </div>
       </ion-slide-page>
 
