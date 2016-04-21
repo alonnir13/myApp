@@ -1,5 +1,48 @@
 angular.module('starter.services', ['ionic', 'LocalStorageModule'])
+  .service('SearchService', function($q, $http) {
+    var searchResult={};
+    return {
+      search: function(data) {
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+        var req = {
+          method: 'GET',
+          url: 'http://ec2-52-38-209-139.us-west-2.compute.amazonaws.com/search/searchAssetByAddress',
+          //dataType: "json",
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+          },
+          params: {Address: "דב הוז"}
+        }
 
+
+        $http(req).then(function(response){
+            deferred.resolve('Welcome ' + name + '!');
+            console.log("success  search" + JSON.stringify(response.data));
+          searchResult = response.data;
+          },
+          function(response){
+            deferred.reject('Wrong credentials.');
+            console.log("Faild to search " + response.status + status + " data: " + req.data);
+
+          });
+        //if (name == 'user' && pw == 'secret') {
+        //  deferred.resolve('Welcome ' + name + '!');
+        //} else {
+        //  deferred.reject('Wrong credentials.');
+        //}
+        promise.success = function(fn) {
+          promise.then(fn);
+          return promise;
+        }
+        promise.error = function(fn) {
+          promise.then(null, fn);
+          return promise;
+        }
+        return promise;
+      }
+    }
+  })
   .service('LoginService', function($q, $http) {
     return {
       loginUser: function(name, pw, localStorageService) {
@@ -7,12 +50,12 @@ angular.module('starter.services', ['ionic', 'LocalStorageModule'])
         var promise = deferred.promise;
         var req = {
           method: 'POST',
-          url: 'http://ec2-52-36-182-79.us-west-2.compute.amazonaws.com/login/validate_User',
+          url: 'http://ec2-52-38-209-139.us-west-2.compute.amazonaws.com/login/validate_User',
           //dataType: "json",
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
           },
-          data: "username=lirond101&password=rnadal101"
+          data: "username=moshe123&password=123"
         }
 
 
@@ -20,9 +63,9 @@ angular.module('starter.services', ['ionic', 'LocalStorageModule'])
           deferred.resolve('Welcome ' + name + '!');
         console.log("success  login");
         },
-          function(){
+          function(response){
             deferred.reject('Wrong credentials.');
-            console.log("Faild to login " + status + " data: " + data);
+            console.log("Faild to login " + response.status + " data: " );
 
           });
         //if (name == 'user' && pw == 'secret') {

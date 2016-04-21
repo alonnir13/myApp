@@ -117,7 +117,11 @@ angular.module('starter.controllers', [])
       $scope.submitSearch = function() {
         var str = $("#form").serialize();
         console.log("submit: " + str.toString());
-        SearchService.search(str).success(console.log("Good!!!!"));
+        SearchService.search(str).success(function(){
+          console.log("Good!!!!");
+        }).error(function(){
+          console.log("Very bad!!!!");
+        });
       }
 
   })
