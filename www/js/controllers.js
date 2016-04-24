@@ -113,7 +113,6 @@ angular.module('starter.controllers', [])
     }
   })
   .controller('SearchCtrl', function($scope, $state, SearchService, $rootScope, $ionicPopup) {
-    //  TODO handle search
     $scope.results =[];
       console.log("result before: " + SearchService.results());
       $scope.submitSearch = function() {
@@ -121,6 +120,7 @@ angular.module('starter.controllers', [])
         console.log("submit: " + str.toString());
         SearchService.search(str).success(function(){
           console.log("Good!!!!");
+          $rootScope.results = [];
             $rootScope.results = SearchService.results();
           $state.go('search-result');
         }).error(function(){

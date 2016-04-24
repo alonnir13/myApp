@@ -26,6 +26,7 @@ angular.module('starter.services', ['ionic', 'LocalStorageModule'])
             console.log("success  search" + JSON.stringify(response.data));
             if(response.data != "") {
               deferred.resolve('Welcome ' + name + '!');
+              searchResult = [];
               searchResult.push(response.data);
           }else deferred.reject("Server problems");
           },
