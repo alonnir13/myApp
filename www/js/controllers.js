@@ -112,18 +112,33 @@ angular.module('starter.controllers', [])
       });
     }
   })
-  .controller('SearchCtrl', function($scope, $state, SearchService) {
+  .controller('SearchCtrl', function($scope, $state, SearchService, $rootScope, $ionicPopup) {
     //  TODO handle search
+    $scope.results =[];
+      console.log("result before: " + SearchService.results());
       $scope.submitSearch = function() {
         var str = $("#form").serialize();
         console.log("submit: " + str.toString());
         SearchService.search(str).success(function(){
           console.log("Good!!!!");
+            $rootScope.results = SearchService.results();
+          $state.go('search-result');
         }).error(function(){
+          var alertPop = $ionicPopup.alert({
+            title: 'החיפוש נכשל',
+            template: 'בעיית חיבור לשרת'
+          })
           console.log("Very bad!!!!");
         });
+
+        console.log("result after: " + JSON.stringify(SearchService.results()));
       }
 
+  })
+  .controller('SearchResultCtrl', function($scope, $state, SearchService, $rootScope) {
+      $scope.results = $rootScope.results;
+    //$scope.results=[{neighborhood: "some", type: "bil"}];
+    console.log("results in scope: " + JSON.stringify($scope.results))
   })
   .controller('UploadCtrl', function($scope, $state) {
   //  TODO handle upload
