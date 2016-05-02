@@ -54,9 +54,9 @@
       <!-- chat view -->
       <ion-slide-page>
 
-        <ino-content>
+        <ino-content data-ng-controller="ChatsCtrl">
         <div>
-        <ion-list data-ng-controller="ChatsCtrl">
+        <ion-list >
           <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats"
                     type="item-text-wrap" href="#/chats/{{chat.id}}">
             <img ng-src="{{chat.face}}">
