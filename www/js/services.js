@@ -1,8 +1,14 @@
 angular.module('starter.services', ['ionic', 'LocalStorageModule'])
   .service('SearchService', function($q, $http) {
-    var searchResult={};
+      var searchResult = [];
     return {
-      search: function(data) {
+      search: doSearch,
+      results: function(){
+        return searchResult;
+      }
+    }
+    //return {
+      function doSearch(data) {
         var deferred = $q.defer();
         var promise = deferred.promise;
         var req = {
@@ -12,14 +18,17 @@ angular.module('starter.services', ['ionic', 'LocalStorageModule'])
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
           },
-          params: {Address: "דב הוז"}
+          params: {Address: "kadesh 39"}
         }
 
 
         $http(req).then(function(response){
-            deferred.resolve('Welcome ' + name + '!');
             console.log("success  search" + JSON.stringify(response.data));
-          searchResult = response.data;
+            if(response.data != "") {
+              deferred.resolve('Welcome ' + name + '!');
+              searchResult = [];
+              searchResult.push(response.data);
+          }else deferred.reject("Server problems");
           },
           function(response){
             deferred.reject('Wrong credentials.');
@@ -41,7 +50,7 @@ angular.module('starter.services', ['ionic', 'LocalStorageModule'])
         }
         return promise;
       }
-    }
+    //}
   })
   .service('LoginService', function($q, $http) {
     return {

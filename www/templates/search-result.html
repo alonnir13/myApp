@@ -1,18 +1,18 @@
 <ion-view>
-  <ion-content id="ar_profile">
+  <ion-content ng-controller="SearchResultCtrl" id="ar_profile">
 
     <!--profile-->
-    <div class="row">
+    <ion-item class="row" ng-repeat="data in results">
       <article class="col col-100">
-        <p>סוכן:משה אטס</p>
-        <p>סוג הנכס: פנטהוז</p>
-        <p>כתובת: אליעזר בן יהודה 19, באר שבע</p>
-        <p>מספר חדרים: 5</p>
-        <p>מחיר: 980,000 ש”ח</p>
-        <p>קומה:12</p>
+        <p>{{data.agent}}סוכן:</p>
+        <p>סוג הנכס: {{data.type}}</p>
+        <p>כתובת: {{data.address}}</p>
+        <p>מספר חדרים: {{data.rooms}}</p>
+        <p> מחיר: {{data.price }} ש"ח</p>
+        <p>קומה:{{data.floor}}</p>
 
 
       </article>
-    </div>
+    </ion-item>
   </ion-content>
 </ion-view>
