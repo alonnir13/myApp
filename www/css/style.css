@@ -121,6 +121,42 @@ text-align: center;
 
 }
 
+
+.contacts_apt_add{
+
+  border-radius:45%;
+  margin-top: 5%;
+  right: 0%;
+  width:47px;
+  height:49px;
+  position:fixed;
+  color: #11c1f3 !important;
+
+
+}
+
+.contacts_apt{
+  width: 100%;
+  height: auto;
+  min-height: 37%;
+}
+
+.asset_img{
+  width:100%;
+  height: auto;
+  min-height: 13%;
+  background-color:#f7f7f7;
+}
+
+
+.img_spec{
+  float: right;
+  margin-top: 6%;
+  margin-right: 5%;
+}
+
+
+
 .button-search {
   width: 85%;
   border-radius: 4px;
@@ -169,7 +205,9 @@ label textarea{
   border-radius: 5px;
   margin-top: 5%;
 
+
 }
+
 
 
 
@@ -267,9 +305,9 @@ ion-nav-back-button{
 
 
 ion-modal-view{
-  background-image:url(../img/home_bg.jpg) !important;
-  background-repeat:no-repeat;
-  background-size:cover;
+  background: transparent !important;
+
+
 
 
 }
@@ -301,4 +339,12 @@ position: fixed;
 
 
 
+.asset_details {
+width: 100%;
+  height: auto;
+  min-height:50%;
+  background-image:url(../img/home_bg.jpg);
+  background-repeat:no-repeat;
+  background-size: cover;
 
+}
