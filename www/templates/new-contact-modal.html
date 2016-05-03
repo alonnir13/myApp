@@ -1,8 +1,11 @@
-<div class="modal">
+<div class="modal" style="background: transparent;">
   <ion-header-bar>
-    <h1 class="title">Edit Contact</h1>
+    <h1 class="title">הוסף לקוח</h1>
+    <button class="button button-icon" ng-click="closeTaskModal2()">
+      <i class="icon ion-android-close"></i>
+    </button>
   </ion-header-bar>
-  <ion-content>
+  <ion-content class="col">
     <div class="list">
       <label class="item item-input">
         <span class="input-label">שם</span>
@@ -18,7 +21,8 @@
       </label>
     </div>
 
-    <button class="button button-block button-positive" ng-click="closeModal()">Done</button>
+    <button class="button button-block button-calm" ng-click="closeModal()">Done</button>
   </ion-content>
   </article>
+
 </div>

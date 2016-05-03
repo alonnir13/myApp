@@ -11,6 +11,9 @@ angular.module('starter.controllers', [])
       $state.go('search');
     };
 
+
+
+
     $scope.$watch('dashboard.slider', function (swiper) {
       if (swiper) {
         $scope.swiper = swiper;
@@ -89,7 +92,16 @@ angular.module('starter.controllers', [])
     $scope.openUpload = function () {
       console.log("upload");
       $state.go('upload');
+    };
+    $scope.goToAssetPage = function () {
+      console.log("asset");
+      $state.go('asset');
     }
+  })
+
+
+  .controller('assetCtrl', function($scope, $state, localStorageService) {
+
   })
 
   .controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state, localStorageService) {
@@ -179,6 +191,8 @@ angular.module('starter.controllers', [])
       $scope.tasks.splice(index, 1);
       localStorageService.set(taskData, $scope.tasks);
     }
+
+
 
     $scope.closeTaskModal = function() {
       $scope.newTaskModal.hide();
