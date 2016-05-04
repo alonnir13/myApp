@@ -1,17 +1,16 @@
 <ion-modal-view >
-  <ion-header-bar class="bar-light" id="modal_bg">
-    <h1 class="title">משימה חדשה</h1>
-    <button class="button button-icon" ng-click="closeTaskModal()">
-      <i class="icon ion-android-close"></i>
-    </button>
-  </ion-header-bar>
+
+
   <ion-content style="overflow: hidden;">
     <form ng-submit="createTask()">
-      <div class="list list-inset">
+      <div class="list list-inset" style="border-radius: 8px;">
+        <button class="button button-icon" ng-click="closeTaskModal()" style="margin-right: 3%;">
+          <i class="icon ion-android-close"></i>
+        </button>
 
         <label class="col item item-input" style="height: 200px;">
 
-          <textarea ng-model="task.content" rows="5" placeholder="כתוב משימה חדשה" style="box-shadow: none; " autofocus ></textarea>
+          <textarea  autofocus  ng-model="task.content" rows="5" placeholder="כתוב משימה חדשה" style="box-shadow: none; "></textarea>
 
         </label>
         <button type="submit" class="  button button-block button-calm" >צור משימה</button>

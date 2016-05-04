@@ -138,7 +138,10 @@ text-align: center;
 .contacts_apt{
   width: 100%;
   height: auto;
-  min-height: 37%;
+  min-height: 41%;
+  background-image:url(../img/home_bg.jpg);
+  background-repeat:no-repeat;
+  background-size: cover;
 }
 
 .asset_img{
@@ -343,9 +346,28 @@ position: fixed;
 .asset_details {
 width: 100%;
   height: auto;
-  min-height:50%;
-  background-image:url(../img/home_bg.jpg);
-  background-repeat:no-repeat;
-  background-size: cover;
+  min-height:52%;
 
 }
+
+.asset_details p{
+  margin-bottom: 0px;
+  margin-bottom: 1px;
+  font-size: 0.9em;
+  text-align: right;
+}
+
+
+.modal-backdrop-bg {
+  transition: opacity 300ms ease-in-out;
+  -webkit-transition: opacity 300ms ease-in-out;
+  background-color: #000;
+  opacity: 0;
+}
+
+.active .modal-backdrop-bg {
+  opacity: 0.5;
+}
+
+
+
