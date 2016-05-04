@@ -369,5 +369,31 @@ width: 100%;
   opacity: 0.5;
 }
 
+.task{
+  padding: 2%;
+  height: auto;
+  min-height: 20px;
+  background-color: #fff;
+  margin-bottom: 1px;
+}
+
+.task p{
+  width: 70%;
+  text-align: right;
+  float: right;
+  margin-top: 4%;
+  margin-right: 2%;
+  color: #8f8f8f;
+}
+
+.task button{
+  background: none;
+  border: none;
+  color: #e42112;
+  line-height: 65px;
+  font-size: 1.5em;
+  text-align: left;
+}
+
 
 

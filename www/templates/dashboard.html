@@ -80,7 +80,23 @@
       <ion-slide-page>
         <div  data-ng-controller="AccountCtrl" ng-init="getTasks()">
           <ion-content>
-          <div class="list card" ng-repeat="task in tasks track by $index">
+            <div>
+            <div class="col task">
+              <button><i class="ion-trash-a"></i> </button>
+
+              <p>להפגש עם משה אטס ולסגור חוזה לגבי שכונה ג</p>
+            </div>
+              </div>
+
+            <div>
+              <div class="col task">
+                <button><i class="ion-trash-a"></i> </button>
+
+                <p>לבדוק נכס חדש למכירה בשכונה ד</p>
+              </div>
+            </div>
+
+            <div class="list card" ng-repeat="task in tasks track by $index">
             <div class="item item-divider">
               <span ng-bind="task.title"></span>
             </div>
