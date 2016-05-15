@@ -1,15 +1,32 @@
-<ion-view title="פרופיל">
+<ion-view >
 
   <!--<label class="item item-input" class="col">-->
     <!--<i class="icon ion-search placeholder-icon" ng-click="changeState()" ></i>-->
   <!--</label>-->
-  <ion-nav-buttons side="primary">
-    <button class="button icon ion-search" ng-click="changeState()">
-    </button>
+
+  <ion-nav-buttons side="left">
+    <!--<button class="button icon ion-search" ng-click="changeState()">-->
+    <!--</button>-->
+    <div class="bar bar-header item-input-inset" >
+      <label class="item-input-wrapper">
+        <i class="icon ion-android-search placeholder-icon"></i>
+        <input type="search" placeholder="חיפוש">
+      </label>
+      </div>
+    </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+      <!--<button class="button button-clear">-->
+<!--בטל-->
+      <!--</button>-->
+      <button class="button button-clear" ng-click="changeState()">
+        חיפוש מתקדם
+      </button>
+    </div>
   </ion-nav-buttons>
+
   <div style="position:absolute;top: 4%;" class="tabs tabs-icon-top tabs-color-active-calm">
     <a class="tab-item" title="פרופיל אישי"
-       data-ng-class="{active: dashboard.activeIndexView === 0}"
+       data-ng-class="{active: dashboard.activeIndexView === 2}"
        data-ng-click="dashboard.slideTo(2)">
       <i title="פרופיל אישי"  class="icon ion-ios-person custom-icon" data-ng-show="dashboard.activeIndexView === 2"></i>
       <i title="פרופיל אישי"  class="icon ion-ios-person-outline" data-ng-show="dashboard.activeIndexView !== 2"></i>
@@ -23,7 +40,7 @@
 משימות
     </a>
     <a class="tab-item"
-       data-ng-class="{active: dashboard.activeIndexView === 2}"
+       data-ng-class="{active: dashboard.activeIndexView === 0}"
        data-ng-click="dashboard.slideTo(0)">
       <i class="icon ion-ios-telephone custom-icon" data-ng-show="dashboard.activeIndexView === 0"></i>
       <i class="icon ion-ios-telephone-outline " data-ng-show="dashboard.activeIndexView !== 0"></i>
@@ -47,7 +64,7 @@
     <!--</ion-tabs>-->
 
   <ion-content>
-    <ion-slides options="{keyboardControl: true, initialSlide: 0}" slider="dashboard.slider">
+    <ion-slides options="{keyboardControl: true, initialSlide: 2}" slider="dashboard.slider">
       <!-- status view -->
 
 
@@ -81,44 +98,12 @@
         <div  data-ng-controller="AccountCtrl" ng-init="getTasks()">
           <ion-content>
             <div>
-            <div class="col task">
-              <button><i class="ion-trash-a"></i> </button>
+            <div class="col task"  ng-repeat="task in tasks track by $index">
+              <button  ng-click="removeTask($index)"><i class="ion-trash-a"></i> </button>
 
-              <p>להפגש עם משה אטס ולסגור חוזה לגבי שכונה ג</p>
+              <p>{{task.content}}</p>
             </div>
               </div>
-
-            <div>
-              <div class="col task">
-                <button><i class="ion-trash-a"></i> </button>
-
-                <p>לבדוק נכס חדש למכירה בשכונה ד</p>
-              </div>
-            </div>
-
-            <div class="list card" ng-repeat="task in tasks track by $index">
-            <div class="item item-divider">
-              <span ng-bind="task.title"></span>
-            </div>
-            <div class="item item-body">
-              <strong>Title: <span ng-bind="task.title"></span></strong>
-              <p>
-                <span ng-bind="task.content"></span>
-              </p>
-            </div>
-
-            <div class="item tabs tabs-secondary tabs-icon-left">
-                <span class="item item-checkbox">
-                    <label class="checkbox">
-                      <input type="checkbox" ng-model="task.completed" ng-click="completeTask($index)">
-                    </label>
-                </span>
-              <a class="tab-item assertive" ng-click="removeTask($index)">
-                <i class="icon ion-android-close"></i>
-              </a>
-            </div>
-
-          </div>
           </ion-content>
         <button ng-click="openTaskModal()" class="btns button button-calm assertive"><i class="ion-compose"></i></button>
         </div>

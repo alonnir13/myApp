@@ -18,7 +18,7 @@ angular.module('starter.services', ['ionic', 'LocalStorageModule'])
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
           },
-          params: {Address: "kadesh 39"}
+          params: {Address: "knaan"}
         }
 
 
