@@ -395,4 +395,10 @@ width: 100%;
   text-align: left;
 }
 
+.icon-accessory{
+  text-align:left;
+}
 
+.ion-ios-settings-strong{
+  font-size: 1.8em;
+}

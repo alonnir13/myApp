@@ -4,22 +4,23 @@
     <!--<i class="icon ion-search placeholder-icon" ng-click="changeState()" ></i>-->
   <!--</label>-->
 
-  <ion-nav-buttons side="left">
+  <ion-nav-buttons side="right">
+
     <!--<button class="button icon ion-search" ng-click="changeState()">-->
     <!--</button>-->
-    <div class="bar bar-header item-input-inset" >
-      <label class="item-input-wrapper">
-        <i class="icon ion-android-search placeholder-icon"></i>
-        <input type="search" placeholder="חיפוש">
-      </label>
+    <div class="bar bar-header item-input-inset" class="row">
+      <label class="item item-input" class="row" style="background: none;">
+      <i class="icon ion-search" ></i>
+      <input type="search" placeholder="חפש כתובת" autofocus keyboard-attach style="border: none; box-shadow: none;">
+    </label>
       </div>
     </ion-nav-buttons>
-  <ion-nav-buttons side="right">
+  <ion-nav-buttons side="left">
       <!--<button class="button button-clear">-->
 <!--בטל-->
       <!--</button>-->
-      <button class="button button-clear" ng-click="changeState()">
-        חיפוש מתקדם
+      <button class="button button-clear ion-ios-settings-strong" ng-click="changeState()">
+
       </button>
     </div>
   </ion-nav-buttons>
@@ -76,10 +77,9 @@
         <ion-list >
           <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats"
                     type="item-text-wrap" href="#/chats/{{chat.id}}">
-            <img ng-src="{{chat.face}}">
             <h2>{{chat.name}}</h2>
             <p>{{chat.lastText}}</p>
-            <i class="icon ion-chevron-right icon-accessory"></i>
+            <i class="icon ion-ios-telephone icon-accessory"></i>
 
             <ion-option-button class="button-assertive" ng-click="remove(chat)">
               Delete
@@ -124,7 +124,6 @@
             <p>מספר חדרים: 5</p>
             <p>מחיר: 980,000 ש”ח</p>
             <p>קומה:12</p>
-
 
           </article>
 
