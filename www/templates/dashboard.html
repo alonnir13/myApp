@@ -98,7 +98,8 @@
         <div  data-ng-controller="AccountCtrl" ng-init="getTasks()">
           <ion-content>
             <div>
-            <div class="col task"  ng-repeat="task in tasks track by $index">
+            <div class="col task" ng-repeat="task in tasks track by $index">
+
               <button  ng-click="removeTask($index)"><i class="ion-trash-a"></i> </button>
 
               <p>{{task.content}}</p>
