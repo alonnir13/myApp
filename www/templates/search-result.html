@@ -1,9 +1,10 @@
-<ion-view>
+<ion-view view-title="תוצאות החיפוש" id="filter_bg">
   <ion-content ng-controller="SearchResultCtrl" id="ar_profile">
 
     <!--profile-->
-    <ion-item class="row" ng-repeat="data in results" href="#/asset/{{data.assetid}} on-">
-      <article class="col col-100">
+    <ion-item class="row" ng-repeat="data in results" style="padding-right: 0px;">
+      <div class="results_wr">
+      <article class="col result_item">
         <p>{{data.agent}}סוכן:</p>
         <p>סוג הנכס: {{data.type}}</p>
         <p>כתובת: {{data.address}}</p>
@@ -13,6 +14,7 @@
 
 
       </article>
+      </div>
     </ion-item>
   </ion-content>
 </ion-view>

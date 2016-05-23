@@ -144,6 +144,11 @@ text-align: center;
   background-size: cover;
 }
 
+.asset_details{
+  background-color: #f7f7f7;
+
+}
+
 .asset_img{
   width:100%;
   height: auto;
@@ -389,7 +394,7 @@ width: 100%;
 .task button{
   background: none;
   border: none;
-  color: #e42112;
+  color: #8f8f8f;
   line-height: 65px;
   font-size: 1.5em;
   text-align: left;
@@ -402,3 +407,10 @@ width: 100%;
 .ion-ios-settings-strong{
   font-size: 1.8em;
 }
+
+.result_item{
+  border-radius: 4px;
+}
+
+
+
