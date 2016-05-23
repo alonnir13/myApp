@@ -18,7 +18,7 @@ angular.module('starter.services', ['ionic', 'LocalStorageModule'])
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
           },
-          params: {Address: "knaan"}
+          params: {Address: "kadesh 39"}
         }
 
 
@@ -64,7 +64,7 @@ angular.module('starter.services', ['ionic', 'LocalStorageModule'])
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
           },
-          data: "username=moshe123&password=123"
+          data: "username="+name + "&password=" + pw
         }
 
 
@@ -77,11 +77,6 @@ angular.module('starter.services', ['ionic', 'LocalStorageModule'])
             console.log("Faild to login " + response.status + " data: " );
 
           });
-        //if (name == 'user' && pw == 'secret') {
-        //  deferred.resolve('Welcome ' + name + '!');
-        //} else {
-        //  deferred.reject('Wrong credentials.');
-        //}
         promise.success = function(fn) {
           promise.then(fn);
           return promise;
@@ -95,6 +90,48 @@ angular.module('starter.services', ['ionic', 'LocalStorageModule'])
     }
   })
 
+  .service('UploadAssetService', function($q, $http){
+    return {
+      uploadAsset: function (name, pw, localStorageService, data) {
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+        var req = {
+          method: 'POST',
+          url: 'http://ec2-52-38-209-139.us-west-2.compute.amazonaws.com/asset/addAsset',
+          //dataType: "json",
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+          },
+          data: data
+        }
+
+
+        $http(req).then(function () {
+            deferred.resolve('Welcome ' + name + '!');
+            console.log("success  login");
+          },
+          function (response) {
+            deferred.reject('Wrong credentials.');
+            console.log("Faild to login " + response.status + " data: ");
+
+          });
+        //if (name == 'user' && pw == 'secret') {
+        //  deferred.resolve('Welcome ' + name + '!');
+        //} else {
+        //  deferred.reject('Wrong credentials.');
+        //}
+        promise.success = function (fn) {
+          promise.then(fn);
+          return promise;
+        }
+        promise.error = function (fn) {
+          promise.then(null, fn);
+          return promise;
+        }
+        return promise;
+      }
+    }
+  })
 
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array

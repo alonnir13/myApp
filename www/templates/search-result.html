@@ -2,7 +2,7 @@
   <ion-content ng-controller="SearchResultCtrl" id="ar_profile">
 
     <!--profile-->
-    <ion-item class="row" ng-repeat="data in results">
+    <ion-item class="row" ng-repeat="data in results" href="#/asset/{{data.assetid}} on-">
       <article class="col col-100">
         <p>{{data.agent}}סוכן:</p>
         <p>סוג הנכס: {{data.type}}</p>

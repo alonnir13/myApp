@@ -33,45 +33,56 @@ angular.module('starter.controllers', [])
       $scope.swiper.slideTo(indexSlide);
     };
   })
-  .controller('ChatsCtrl', function ($scope, Chats, $ionicModal,$ionicTabsDelegate) {
-    // With the new view caching in Ionic, Controllers are only called
-    // when they are recreated or on app start, instead of every page change.
-    // To listen for when this page is active (for example, to refresh data),
-    // listen for the $ionicView.enter event:
-    //
-    //$scope.$on('$ionicView.enter', function(e) {
-    //});
+  .controller('ChatsCtrl', function ($scope, Chats, $ionicModal,$ionicTabsDelegate, localStorageService) {
+
+    var contactData = "contactStorage";
+
+    $scope.contacts = [];
+
+    $scope.contact = {};
 
     $ionicModal.fromTemplateUrl('templates/new-contact-modal.html', {
       scope: $scope,
       animation: 'slide-in-up',
     }).then(function(modal) {
-      $scope.modal = modal;
+      $scope.newContactModal = modal;
     });
+    $scope.getContacts = function () {
+      //fetches contact from local storage
+      if (localStorageService.get(contactData)) {
+        $scope.contacts = localStorageService.get(contactData);
+      } else {
+        $scope.contacts = [];
+      }
+    }
+    $scope.createContact = function () {
+      //creates a new contact
+      $scope.contacts.push($scope.contact);
+      localStorageService.set(contactData, $scope.contacts);
+      $scope.contact = {};
+      //close new contact modal
+      $scope.newContactModal.hide();
+    }
+    $scope.removeContact = function (index) {
+      //removes a contact
+      $scope.contacts.splice(index, 1);
+      localStorageService.set(contactData, $scope.contacts);
+    }
 
-    $scope.openModal = function() {
-      console.log("contact");
-      $scope.modal.show();
-    };
+    $scope.closeContactModal = function() {
+      $scope.newContactModal.hide();
+    }
+    $scope.completeContact = function (index) {
+      //updates a contact as completed
+      if (index !== -1) {
+        $scope.contacts[index].completed = true;
+      }
 
-    $scope.closeModal = function() {
-      $scope.modal.hide();
-    };
-
-    //Cleanup the modal when we're done with it!
-    $scope.$on('$destroy', function() {
-      $scope.modal.remove();
-    });
-
-    // Execute action on hide modal
-    $scope.$on('modal.hidden', function() {
-      // Execute action
-    });
-
-    // Execute action on remove modal
-    $scope.$on('modal.removed', function() {
-      // Execute action
-    });
+      localStorageService.set(contactData, $scope.contacts);
+    }
+    $scope.openContactModal = function () {
+      $scope.newContactModal.show();
+    }
 
     $scope.chats = Chats.all();
 
@@ -97,8 +108,40 @@ angular.module('starter.controllers', [])
   })
 
 
-  .controller('assetCtrl', function($scope, $state, localStorageService) {
+  .controller('assetCtrl', function($scope, $state, $ionicModal, localStorageService) {
+    var clientStorage = "clientStorage";
+    var clients = [];
 
+    var client = {};
+
+    $ionicModal.fromTemplateUrl('templates/add-interested-client-modal.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function (modal) {
+      $scope.clientModal = modal;
+    });
+
+    $scope.getClients = function() {
+      if (localStorageService.get(contactData)) {
+        $scope.clients = localStorageService.get(contactData);
+      } else {
+        $scope.clients = [];
+      }
+    }
+    $scope.closeClientModal = function(){
+      $scope.clientModal.hide();
+    }
+    $scope.openClientModal = function(){
+      $scope.clientModal.show();
+    }
+
+    $scope.createClient = function(){
+      $scope.clients.push($scope.client);
+      localStorageService.set(clientStorage, $scope.clients);
+      $scope.client = {};
+      //close new contact modal
+      $scope.clientModal.hide();
+    }
   })
 
   .controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state, localStorageService) {
@@ -112,6 +155,8 @@ angular.module('starter.controllers', [])
       console.log("LOGIN user: " + $scope.data.username + " - PW: " + $scope.data.password);
       LoginService.loginUser($scope.data.username, $scope.data.password, localStorageService).success(function(data) {
         localStorageService.set("isLoggedIn", true);
+        localStorageService.set("TUserName", $scope.data.username);
+        localStorageService.set("TPass",  $scope.data.password);
         $state.go('dashboard');
       }).error(function(data) {
         var alertPopup = $ionicPopup.alert({
