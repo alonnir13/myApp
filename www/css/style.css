@@ -400,6 +400,34 @@ width: 100%;
   text-align: left;
 }
 
+
+.asset_client{
+  margin-top: 15%;
+  width: 100%;
+  padding-right: 5%;
+  height: auto;
+  min-height: 40px;
+  background-color: #fff;
+  margin-bottom: 1px;
+}
+
+.asset_client button{
+  text-align: left;
+  background: none;
+  border: none;
+  color: #8f8f8f;
+  font-size: 1.5em;
+
+}
+
+
+.client_name {
+  width: 75%;
+  text-align: right;
+  line-height: 40px;
+}
+
+
 .icon-accessory{
   text-align:left;
 }

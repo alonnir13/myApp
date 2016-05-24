@@ -77,13 +77,15 @@
         <ion-list >
           <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="contact in contacts track by $index"
                     type="item-text-wrap">
-            <button  ng-click="removeContact($index)"><i class="ion-trash-a"></i> </button>
+            <div class="col task">
+            <button ng-click="removeContact($index)" ><i class=" ion-trash-a"></i> </button>
             <h2>{{contact.name}}</h2>
             <p>{{contact.info}}</p>
             <a class="icon ion-ios-telephone icon-accessory" href="tel:{{contact.phone}}"></a>
             <!--<ion-option-button class="button-assertive" ng-click="remove(chat)">-->
               <!--Delete-->
             <!--</ion-option-button>-->
+            </div>
 
           </ion-item>
         </ion-list>
@@ -100,7 +102,7 @@
             <div>
             <div class="col task" ng-repeat="task in tasks track by $index">
 
-              <button  ng-click="removeTask($index)"><i class="ion-trash-a"></i> </button>
+              <button ng-click="removeTask($index)"><i class=" ion-trash-a"></i> </button>
 
               <p>{{task.content}}</p>
             </div>
