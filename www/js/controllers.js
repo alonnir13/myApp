@@ -122,8 +122,8 @@ angular.module('starter.controllers', [])
     });
 
     $scope.getClients = function() {
-      if (localStorageService.get(contactData)) {
-        $scope.clients = localStorageService.get(contactData);
+      if (localStorageService.get(clientStorage)) {
+        $scope.clients = localStorageService.get(clientStorage);
       } else {
         $scope.clients = [];
       }
