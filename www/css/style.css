@@ -144,10 +144,7 @@ text-align: center;
   background-size: cover;
 }
 
-.asset_details{
-  background-color: #f7f7f7;
 
-}
 
 .asset_img{
   width:100%;
@@ -401,7 +398,7 @@ width: 100%;
 }
 
 
-.asset_client{
+.asset_client {
   margin-top: 15%;
   width: 100%;
   padding-right: 5%;
@@ -411,7 +408,30 @@ width: 100%;
   margin-bottom: 1px;
 }
 
-.asset_client button{
+.contact_info{
+  margin-top: 10%;
+  width: 100%;
+  padding-right: 5%;
+  height: auto;
+  min-height: 83px !important;
+  background-color: #fff;
+  margin-bottom: 1px;
+}
+
+.contact_info .client_name_page{
+
+  width: 70%;
+  padding: 1%;
+  clear: both;
+
+}
+
+
+.row .contact_info{
+  height: 55px;
+}
+
+.asset_client button ,.contact_info button{
   text-align: left;
   background: none;
   border: none;
@@ -427,6 +447,8 @@ width: 100%;
   line-height: 40px;
 
 }
+
+
 
 
 .icon-accessory{

@@ -74,21 +74,21 @@
 
         <ino-content data-ng-controller="ChatsCtrl">
         <div ng-init="getContacts()">
-        <ion-list >
-          <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="contact in contacts track by $index"
-                    type="item-text-wrap">
-            <div class="col task">
-            <button ng-click="removeContact($index)" ><i class=" ion-trash-a"></i> </button>
-            <h2>{{contact.name}}</h2>
-            <p>{{contact.info}}</p>
-            <a class="icon ion-ios-telephone icon-accessory" href="tel:{{contact.phone}}"></a>
-            <!--<ion-option-button class="button-assertive" ng-click="remove(chat)">-->
-              <!--Delete-->
-            <!--</ion-option-button>-->
+
+        </div>
+            <div class="row contact_info">
+
+              <p class="client_name_page">משה אטס</p>
+              <p class="client_name_page">054-7454455</p>
+              <p class="client_name_page">מוכר במינימום 800000</p>
+              <button side="left" style="margin-left: 5%; color:#33cd5f;"><i class=" ion-ios-telephone"></i> </button>
+
+              <button side="left"><i class=" ion-trash-a"></i> </button>
+
+
+
             </div>
 
-          </ion-item>
-        </ion-list>
         <button class="btns button button-calm button-md " ng-click="openContactModal()" ><i class="ion-person-add"></i></button>
         </div>
         </ino-content>
