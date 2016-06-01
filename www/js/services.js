@@ -18,7 +18,7 @@ angular.module('starter.services', ['ionic', 'LocalStorageModule'])
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
           },
-          params: {Address: "kadesh 39"}
+          params: {Address: "דב הוז"}
         }
 
 
@@ -52,9 +52,16 @@ angular.module('starter.services', ['ionic', 'LocalStorageModule'])
       }
     //}
   })
-  .service('LoginService', function($q, $http) {
+  .factory('LoginService', function($q, $http) {
+    var fav = [];
     return {
-      loginUser: function(name, pw, localStorageService) {
+      loginUser: login,
+      favorites: function() {
+        return fav;
+      }
+
+    }
+       function login(name, pw, localStorageService) {
         var deferred = $q.defer();
         var promise = deferred.promise;
         var req = {
@@ -68,13 +75,19 @@ angular.module('starter.services', ['ionic', 'LocalStorageModule'])
         }
 
 
-        $http(req).then(function(){
-          deferred.resolve('Welcome ' + name + '!');
-        console.log("success  login");
-        },
+        $http(req).then(function(response){
+            console.log("success  search" + JSON.stringify(response.data));
+            if(response.data != "") {
+              deferred.resolve('Welcome ' + name + '!');
+              fav = [];
+              fav.push(response.data);
+
+              console.log("fav pushed" + fav);
+            }else deferred.reject("Server problems");
+          },
           function(response){
             deferred.reject('Wrong credentials.');
-            console.log("Faild to login " + response.status + " data: " );
+            console.log("Faild to search " + response.status + status + " data: " + req.data);
 
           });
         promise.success = function(fn) {
@@ -87,12 +100,12 @@ angular.module('starter.services', ['ionic', 'LocalStorageModule'])
         }
         return promise;
       }
-    }
+
   })
 
-  .service('UploadAssetService', function($q, $http){
+  .service('UploadAssetService', function($q, $http, localStorageService){
     return {
-      uploadAsset: function (name, pw, localStorageService, data) {
+      uploadAsset: function (str) {
         var deferred = $q.defer();
         var promise = deferred.promise;
         var req = {
@@ -102,7 +115,7 @@ angular.module('starter.services', ['ionic', 'LocalStorageModule'])
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
           },
-          data: data
+          data: str  + "&Agent=" + localStorageService.get("TUserName")
         }
 
 

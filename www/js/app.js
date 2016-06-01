@@ -53,7 +53,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   $stateProvider
   // Each tab has its own nav history stack:
     .state('asset', {
-      url: '/asset',
+      url: '/asset/:assetid',
       templateUrl: 'templates/asset.html',
       controller: 'assetCtrl'
     })
