@@ -421,8 +421,9 @@ width: 100%;
 .contact_info .client_name_page{
 
   width: 70%;
-  padding: 1%;
-  clear: both;
+  text-align: right;
+  line-height: 70px;
+
 
 }
 
@@ -436,7 +437,7 @@ width: 100%;
   background: none;
   border: none;
   color: #8f8f8f;
-  font-size: 1.5em;
+  font-size: 1.7em;
 
 }
 
