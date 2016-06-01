@@ -1,18 +1,23 @@
 <ion-view view-title=  "העלה נכס" name="login-view" id="filter_bg">
-  <ion-content style="top: 1%; overflow: hidden;">
-    <form role="form">
+  <ion-content  style="top: 1%; overflow: hidden;">
+    <form role="form" id="upform">
 
 
       <label class="row" style="margin-bottom: 10%; margin-top: 8%">
 
-        <input  type="text" placeholder="שכונה " class="col" class="input_set">
+        <input  type="text" name="Address" placeholder="רחוב" class="col" class="input_set">
+      </label>
+
+      <label class="row" style="margin-bottom: 10%; margin-top: 8%">
+
+        <input  type="text" name="Neighborhood" placeholder="שכונה " class="col" class="input_set">
       </label>
 
 
 
       <label class="row" style="margin-bottom: 6%;">
         <div class="col-50" >
-          <select  name="assetType" >
+          <select  name="Type" >
 
             <option >בית פרטי</option>
             <option >דירה</option>
@@ -21,7 +26,7 @@
         </div>
 
         <div class="col-50" >
-          <select name="status" >
+          <select >
             <option >נמכר</option>
             <option >בשיווק</option>
             <option >מושכר</option>
@@ -33,16 +38,16 @@
 
       <label class="row" style="margin-bottom: 25px;">
         <div class="col-30">
-          <input  type="text" placeholder="מס' חדרים "  class="input_set">
+          <input name="Rooms" type="text" placeholder="מס' חדרים "  class="input_set">
         </div>
         <div class="col-30">
 
-          <input  type="text" placeholder="מחיר "  class="input_set">
+          <input name="Price" type="text" placeholder="מחיר "  class="input_set">
         </div>
 
 
         <div class="col-30">
-          <input  type="text" placeholder="קומה"  class="input_set">
+          <input name="Floor"  type="text" placeholder="קומה"  class="input_set">
         </div>
 
       </label>
@@ -54,19 +59,19 @@
         <label>
           <p>מעלית</p>
           <div class="col-33">
-            <ion-checkbox class="checkbox-dark" ng-model="isChecked.vlue1" ng-readonly="true"></ion-checkbox>
+            <ion-checkbox name="Elevator" class="checkbox-dark" ng-model="isChecked.vlue1" ng-readonly="true"></ion-checkbox>
           </div>
         </label>
         <label>
           <p>מיזוג</p>
           <div class="col-33">
-            <ion-checkbox class="checkbox-dark" ng-model="isCheckedvalue2" ng-readonly="true"></ion-checkbox>
+            <ion-checkbox name="AirCon" class="checkbox-dark" ng-model="isCheckedvalue2" ng-readonly="true"></ion-checkbox>
           </div>
         </label>
         <label>
           <p>ממ"ד</p>
           <div class="col-33">
-            <ion-checkbox class="checkbox-dark" ng-model="isChecked.value3" ng-readonly="true"></ion-checkbox>
+            <ion-checkbox name="Mamad" class="checkbox-dark" ng-model="isChecked.value3" ng-readonly="true"></ion-checkbox>
           </div>
         </label>
       </div>
@@ -75,7 +80,7 @@
 
       <label class="row" style="margin-bottom: 25px;">
         <textarea  type="text" placeholder="כתוב תיאור קצר " class="col" class="input_set"></textarea>
-        
+
       </label>
 
       <button class="btns takePic  button button-calm" ><i class="ion-ios-camera" ></i></button>
@@ -88,7 +93,7 @@
 
   </ion-content>
 
-  <button full class="button button-calm button-search " >סנן</button>
+  <button full class="button button-calm button-search " ng-click="uploadAsset()" >העלה</button>
 
 
 </ion-view>

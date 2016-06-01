@@ -1,3 +1,5 @@
+var favStorage = "favorites";
+
 angular.module('starter.controllers', [])
 
   .controller('DashCtrl', function ($scope) {
@@ -16,11 +18,11 @@ angular.module('starter.controllers', [])
         $scope.swiper = swiper;
 
         swiper.on('onSlideChangeStart', function (swiper) {
-          if(!$scope.$$phase) {
+          if (!$scope.$$phase) {
             $scope.$apply(function () {
               $scope.dashboard.activeIndexView = swiper.snapIndex;
               //$scope.enterState()
-              console.log("slide " +swiper.snapIndex);
+              console.log("slide " + swiper.snapIndex);
             });
           } else {
             $scope.dashboard.activeIndexView = swiper.snapIndex;
@@ -33,7 +35,7 @@ angular.module('starter.controllers', [])
       $scope.swiper.slideTo(indexSlide);
     };
   })
-  .controller('ChatsCtrl', function ($scope, Chats, $ionicModal,$ionicTabsDelegate, localStorageService) {
+  .controller('ChatsCtrl', function ($scope, Chats, $ionicModal, $ionicTabsDelegate, localStorageService) {
 
     var contactData = "contactStorage";
 
@@ -44,7 +46,7 @@ angular.module('starter.controllers', [])
     $ionicModal.fromTemplateUrl('templates/new-contact-modal.html', {
       scope: $scope,
       animation: 'slide-in-up',
-    }).then(function(modal) {
+    }).then(function (modal) {
       $scope.newContactModal = modal;
     });
     $scope.getContacts = function () {
@@ -69,7 +71,7 @@ angular.module('starter.controllers', [])
       localStorageService.set(contactData, $scope.contacts);
     }
 
-    $scope.closeContactModal = function() {
+    $scope.closeContactModal = function () {
       $scope.newContactModal.hide();
     }
     $scope.completeContact = function (index) {
@@ -96,7 +98,13 @@ angular.module('starter.controllers', [])
     $scope.chat = Chats.get($stateParams.chatId);
   })
 
-  .controller('ProfileCtrl', function($scope, $state, localStorageService) {
+  .controller('ProfileCtrl', function ($scope, $state, $rootScope, localStorageService) {
+
+    $scope.getFav = function () {
+      console.log("profile init");
+      $scope.favor = localStorageService.get(favStorage);
+    }
+
     $scope.openUpload = function () {
       console.log("upload");
       $state.go('upload');
@@ -108,11 +116,21 @@ angular.module('starter.controllers', [])
   })
 
 
-  .controller('assetCtrl', function($scope, $state, $ionicModal, localStorageService) {
+  .controller('assetCtrl', function ($scope, $state, $ionicModal, localStorageService, $stateParams) {
     var clientStorage = "clientStorage";
     var clients = [];
-
+    $scope.asset = getAsset($stateParams.assetid);
     var client = {};
+
+    function getAsset(id) {
+      var data = localStorageService.get(favStorage);
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].assetid === parseInt(id)) {
+          return data[i];
+        }
+      }
+
+    }
 
     $ionicModal.fromTemplateUrl('templates/add-interested-client-modal.html', {
       scope: $scope,
@@ -121,21 +139,21 @@ angular.module('starter.controllers', [])
       $scope.clientModal = modal;
     });
 
-    $scope.getClients = function() {
+    $scope.getClients = function () {
       if (localStorageService.get(clientStorage)) {
         $scope.clients = localStorageService.get(clientStorage);
       } else {
         $scope.clients = [];
       }
     }
-    $scope.closeClientModal = function(){
+    $scope.closeClientModal = function () {
       $scope.clientModal.hide();
     }
-    $scope.openClientModal = function(){
+    $scope.openClientModal = function () {
       $scope.clientModal.show();
     }
 
-    $scope.createClient = function(){
+    $scope.createClient = function () {
       $scope.clients.push($scope.client);
       localStorageService.set(clientStorage, $scope.clients);
       $scope.client = {};
@@ -144,21 +162,45 @@ angular.module('starter.controllers', [])
     }
   })
 
-  .controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state, localStorageService) {
-    $scope.data = {};
+  .controller('UploadCtrl', function ($scope, UploadAssetService, $ionicPopup, $state) {
+    $scope.uploadAsset = function () {
+      var str = $("#upform").serialize();
+      console.log("submit: " + str.toString());
 
-    if(localStorageService.get("isLoggedIn")){
+      UploadAssetService.uploadAsset(str.toString()).success(function () {
+        var alertPop = $ionicPopup.alert({
+          title: 'החיפוש צלח',
+          template: 'אחלה'
+        })
+        console.log("Very good!!!!");
+      }).error(function () {
+        var alertPop = $ionicPopup.alert({
+          title: 'החיפוש נכשל',
+          template: 'בעיית חיבור לשרת'
+        })
+        console.log("Very bad!!!!");
+      });
+    }
+  })
+  .controller('LoginCtrl', function ($scope, LoginService, $ionicPopup, $state, localStorageService, $rootScope) {
+    $scope.data = {};
+    $scope.fav = [];
+    if (localStorageService.get("isLoggedIn")) {
       $state.go('dashboard');
     }
-
-    $scope.login = function() {
+    console.log("log before: " + LoginService.favorites());
+    $scope.login = function () {
       console.log("LOGIN user: " + $scope.data.username + " - PW: " + $scope.data.password);
-      LoginService.loginUser($scope.data.username, $scope.data.password, localStorageService).success(function(data) {
-        localStorageService.set("isLoggedIn", true);
+      LoginService.loginUser($scope.data.username, $scope.data.password, localStorageService).success(function (data) {
         localStorageService.set("TUserName", $scope.data.username);
-        localStorageService.set("TPass",  $scope.data.password);
+        localStorageService.set("TPass", $scope.data.password);
+        $rootScope.fav = [];
+        $rootScope.fav = LoginService.favorites();
+        localStorageService.set(favStorage, $rootScope.fav[0]);
+        //localStorageService.set("isLoggedIn", true);
+        console.log("log after: " + $rootScope.fav);
         $state.go('dashboard');
-      }).error(function(data) {
+      }).error(function (data) {
         var alertPopup = $ionicPopup.alert({
           title: 'Login failed!',
           template: 'Please check your credentials!'
@@ -166,36 +208,33 @@ angular.module('starter.controllers', [])
       });
     }
   })
-  .controller('SearchCtrl', function($scope, $state, SearchService, $rootScope, $ionicPopup) {
-    $scope.results =[];
-      console.log("result before: " + SearchService.results());
-      $scope.submitSearch = function() {
-        var str = $("#form").serialize();
-        console.log("submit: " + str.toString());
-        SearchService.search(str).success(function(){
-          console.log("Good!!!!");
-          $rootScope.results = [];
-            $rootScope.results = SearchService.results();
-          $state.go('search-result');
-        }).error(function(){
-          var alertPop = $ionicPopup.alert({
-            title: 'החיפוש נכשל',
-            template: 'בעיית חיבור לשרת'
-          })
-          console.log("Very bad!!!!");
-        });
+  .controller('SearchCtrl', function ($scope, $state, SearchService, $rootScope, $ionicPopup) {
+    $scope.results = [];
+    console.log("result before: " + SearchService.results());
+    $scope.submitSearch = function () {
+      var str = $("#form").serialize();
+      console.log("submit: " + str.toString());
+      SearchService.search(str).success(function () {
+        console.log("Good!!!!");
+        $rootScope.results = [];
+        $rootScope.results = SearchService.results();
+        $state.go('search-result');
+      }).error(function () {
+        var alertPop = $ionicPopup.alert({
+          title: 'החיפוש נכשל',
+          template: 'בעיית חיבור לשרת'
+        })
+        console.log("Very bad!!!!");
+      });
 
-        console.log("result after: " + JSON.stringify(SearchService.results()));
-      }
+      console.log("result after: " + JSON.stringify(SearchService.results()));
+    }
 
   })
-  .controller('SearchResultCtrl', function($scope, $state, SearchService, $rootScope) {
-      $scope.results = $rootScope.results;
+  .controller('SearchResultCtrl', function ($scope, $state, SearchService, $rootScope) {
+    $scope.results = $rootScope.results;
     //$scope.results=[{neighborhood: "some", type: "bil"}];
     console.log("results in scope: " + JSON.stringify($scope.results))
-  })
-  .controller('UploadCtrl', function($scope, $state) {
-  //  TODO handle upload
   })
 
   .controller('AccountCtrl', function ($scope, $ionicModal, localStorageService) {
@@ -219,7 +258,8 @@ angular.module('starter.controllers', [])
         $scope.tasks = localStorageService.get(taskData);
       } else {
         $scope.tasks = [];
-      }    }
+      }
+    }
     $scope.createTask = function () {
       //creates a new task
       $scope.tasks.push($scope.task);
@@ -234,7 +274,7 @@ angular.module('starter.controllers', [])
       localStorageService.set(taskData, $scope.tasks);
     }
 
-    $scope.closeTaskModal = function() {
+    $scope.closeTaskModal = function () {
       $scope.newTaskModal.hide();
     }
     $scope.completeTask = function (index) {
@@ -254,30 +294,30 @@ angular.module('starter.controllers', [])
 
 // shit
 angular.module('mySuperApp', ['ionic'])
-  .controller(function($scope, $ionicActionSheet, $timeout) {
+  .controller(function ($scope, $ionicActionSheet, $timeout) {
 
     // Triggered on a button click, or some other target
-    $scope.show_sheet = function() {
+    $scope.show_sheet = function () {
 
       // Show the action sheet
       var hideSheet = $ionicActionSheet.show_sheet({
         buttons: [
-          { text: '<b>Share</b> This' },
-          { text: 'Move' }
+          {text: '<b>Share</b> This'},
+          {text: 'Move'}
         ],
         destructiveText: 'Delete',
         titleText: 'Modify your album',
         cancelText: 'Cancel',
-        cancel: function() {
+        cancel: function () {
           // add cancel code..
         },
-        buttonClicked: function(index) {
+        buttonClicked: function (index) {
           return true;
         }
       });
 
       // For example's sake, hide the sheet after two seconds
-      $timeout(function() {
+      $timeout(function () {
         hideSheet();
       }, 2000);
 
