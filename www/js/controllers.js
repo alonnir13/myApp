@@ -4,8 +4,21 @@ angular.module('starter.controllers', [])
 
   .controller('DashCtrl', function ($scope) {
   })
-  .controller('DashboardController', function ($scope, $state, $ionicViewSwitcher) {
+  .controller('DashboardController', function ($scope, filterFilter, $state, $ionicViewSwitcher, $http) {
     $scope.dashboard = {swiper: false, slider: false, activeIndexView: 2};
+    $scope.model = "";
+    $scope.getSt = function() {
+      $http.get('img/BS_streets.txt')
+        .then(function (res) {
+          $scope.streets = res.data;
+          console.log("json up ");
+        });
+      return $scope.streets;
+    }
+    $scope.filterStreets=function(){
+
+      $scope.filteredArray = filterFilter($scope.streets, {street:$scope.address_filter});
+    };
 
     $scope.changeState = function () {
       console.log("search");
@@ -35,10 +48,14 @@ angular.module('starter.controllers', [])
       $scope.swiper.slideTo(indexSlide);
     };
   })
-  .controller('ChatsCtrl', function ($scope, Chats, $ionicModal, $ionicTabsDelegate, localStorageService) {
+  .controller('ChatsCtrl', function ($scope, Chats, $ionicModal, $ionicPopup, $ionicTabsDelegate, localStorageService, $location) {
 
     var contactData = "contactStorage";
-
+    $scope.phone = function ( path ) {
+      console.log("path: " + path);
+      //$location.url('tel:'+path);
+      window.location.href = 'tel:'+path;
+    };
     $scope.contacts = [];
 
     $scope.contact = {};
@@ -58,12 +75,19 @@ angular.module('starter.controllers', [])
       }
     }
     $scope.createContact = function () {
-      //creates a new contact
-      $scope.contacts.push($scope.contact);
-      localStorageService.set(contactData, $scope.contacts);
-      $scope.contact = {};
-      //close new contact modal
-      $scope.newContactModal.hide();
+      if ($scope.contact.name != null && $scope.contact.phone > 0) {
+        //creates a new contact
+        $scope.contacts.push($scope.contact);
+        localStorageService.set(contactData, $scope.contacts);
+        $scope.contact = {};
+        //close new contact modal
+        $scope.newContactModal.hide();
+      }else {
+        var alertPop = $ionicPopup.alert({
+          title: 'תקלה',
+          template: 'אחד השדות חסר'
+        });
+      }
     }
     $scope.removeContact = function (index) {
       //removes a contact
@@ -165,7 +189,7 @@ angular.module('starter.controllers', [])
   .controller('UploadCtrl', function ($scope, UploadAssetService, $ionicPopup, $state) {
     $scope.uploadAsset = function () {
       var str = $("#upform").serialize();
-      console.log("submit: " + str.toString());
+      console.log("submit: " + str.toString()+ "   "+ $scope.isCheck);
 
       UploadAssetService.uploadAsset(str.toString()).success(function () {
         var alertPop = $ionicPopup.alert({
@@ -197,13 +221,13 @@ angular.module('starter.controllers', [])
         $rootScope.fav = [];
         $rootScope.fav = LoginService.favorites();
         localStorageService.set(favStorage, $rootScope.fav[0]);
-        //localStorageService.set("isLoggedIn", true);
+        localStorageService.set("isLoggedIn", true);
         console.log("log after: " + $rootScope.fav);
         $state.go('dashboard');
       }).error(function (data) {
         var alertPopup = $ionicPopup.alert({
           title: 'Login failed!',
-          template: 'Please check your credentials!'
+          template: 'Please check your credentials!' + data
         });
       });
     }

@@ -8,6 +8,8 @@
     Your Name Here
   </author>
   <content src="index.html"/>
+  <allow-navigation href="*" />
+  <allow-intent href="tel:*" />
   <access origin="*"/>
   <access origin="tel:*" launch-external="yes" />
   <preference name="webviewbounce" value="false"/>
