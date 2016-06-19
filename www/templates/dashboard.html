@@ -80,13 +80,14 @@
       <!-- status view -->
 
 
-      <!-- chat view -->
+      <!--contact -->
       <ion-slide-page>
 
         <ino-content data-ng-controller="ChatsCtrl">
         <div ng-init="getContacts()">
 
         </div>
+          <div class="col">
             <div ng-repeat="contact in contacts track by $index" class="row contact_info">
 
               <p class="client_name_page">{{contact.name}}</p>
@@ -95,7 +96,7 @@
               <!--<a class=" ion-ios-telephone" href="tel:{{contact.phone}}"></a>-->
               <button ng-click="removeContact($index)" side="left"><i class=" ion-trash-a"></i> </button>
 
-
+</div>
 
             </div>
 
@@ -105,11 +106,11 @@
       </ion-slide-page>
 
 
-      <!-- account view -->
+      <!-- task -->
       <ion-slide-page>
         <div  data-ng-controller="AccountCtrl" ng-init="getTasks()">
           <ion-content>
-            <div>
+            <div class="col">
             <div class="col task" ng-repeat="task in tasks track by $index">
 
               <button ng-click="removeTask($index)"><i class=" ion-trash-a"></i> </button>
@@ -125,21 +126,24 @@
 
       <!--Profile-->
       <ion-slide-page>
+
         <div data-ng-controller="ProfileCtrl">
         <ion-content ng-init="getFav()" id="ar_profile">
 
-          <ion-item class="row" ng-repeat="data in favor track by $index" href="#/asset/{{data.assetid}} on-" style="padding-right: 0px;margin-top: 10px;">
+          <ion-item  class="row" ng-repeat="data in favor track by $index" href="#/asset/{{data.assetid}} on-" style="border-radius:10px; padding-right: 0px;margin-top: 10px; opacity: 0.9; text-align: right;">
             <div class="results_wr">
-              <article class="col result_item">
+
                 <p>{{data.agent}}סוכן:</p>
                 <p>סוג הנכס: {{data.type}}</p>
                 <p>כתובת: {{data.address}}</p>
                 <p>מספר חדרים: {{data.rooms}}</p>
                 <p> מחיר: {{data.price }} ש"ח</p>
+                <p>מס' בית:</p>
                 <p>קומה:{{data.floor}}</p>
+                <p>מ"ר:</p>
 
 
-              </article>
+
             </div>
             <div></div>
           </ion-item>

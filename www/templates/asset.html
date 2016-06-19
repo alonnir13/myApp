@@ -11,6 +11,7 @@
       <p>מחיר: {{asset.price}} ש”ח</p>
       <p>מספר חדרים: {{asset.rooms}}</p>
       <p>מ”ר: {{asset.square}}</p>
+      <p>מס' בית:</p>
       <p>קומה:{{asset.floor}}</p>
       <p>בנוסף: מרפסת, מעלית, מיזוג, ממ”ד</p>
 
@@ -24,7 +25,8 @@
     <div class="contacts_apt" class="row">
       <p style="margin-top: 15px; margin-bottom: -15px; text-align: right; margin-right: 5%;">לקוחות המעוניינים בנכס:</p>
       <button class="contacts_apt_add button button-clear " ng-click="openClientModal()"><i class="ion-plus-round"></i></button>
-     <div class="row asset_client">
+      <div class="col">
+     <div class="row asset_client" style="border-radius: 10px;">
 
        <p class="client_name">משה אטס</p>
        <button side="left" style="margin-left: 5%; color:#33cd5f;"><i class=" ion-ios-telephone"></i> </button>
@@ -34,10 +36,11 @@
 
 
      </div>
+      </div>
 
     </div>
 
-    <div ng-init="getClients()" class="asset_img" class="row padding padding-top">
+    <!--<div ng-init="getClients()" class="asset_img" class="row padding padding-top">
       <p style="margin-bottom: -15px; text-align: right; margin-right: 5%; display: block;"> תמונות:</p>
       <div class="img_spec col-33">img here</div>
       <div class="img_spec col-33">img here</div>
@@ -48,7 +51,7 @@
 
 
 
-    </div>
+    </div>-->
 
 
 

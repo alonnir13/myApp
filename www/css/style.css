@@ -62,6 +62,7 @@ ion-content{
 	color:#909090;
 	text-align:right;
   border-radius: 4px;
+  opacity: 0.9;
 }
 
 ion-content #ar_profile article h1 {
@@ -138,7 +139,7 @@ text-align: center;
 .contacts_apt{
   width: 100%;
   height: auto;
-  min-height: 41%;
+  min-height: 48%;
   background-image:url(../img/home_bg.jpg);
   background-repeat:no-repeat;
   background-size: cover;
@@ -377,6 +378,8 @@ width: 100%;
   min-height: 20px;
   background-color: #fff;
   margin-bottom: 1px;
+  border-radius: 10px;
+  opacity: 0.9;
 }
 
 .task p{
@@ -413,9 +416,11 @@ width: 100%;
   width: 100%;
   padding-right: 5%;
   height: auto;
-  min-height: 83px !important;
+  min-height: 73px !important;
   background-color: #fff;
   margin-bottom: 1px;
+  border-radius: 10px;
+  opacity: 0.9;
 }
 
 .contact_info .client_name_page{
@@ -462,6 +467,17 @@ width: 100%;
 
 .result_item{
   border-radius: 4px;
+}
+
+
+
+#login_bg{
+  background-image:url(../img/login.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+
+
 }
 
 
