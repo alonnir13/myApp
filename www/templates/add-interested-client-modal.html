@@ -9,12 +9,13 @@
         </button>
 
         <label class="col item item-input" style="height: 200px;">
-
-          <textarea  autofocus  ng-model="task.content" rows="5" placeholder="כתוב משימה חדשה" style="box-shadow: none; "></textarea>
+          <div class="list"  ng-repeat="contact in contacts">
+            <li class="item"  ng-click="">{{contact.name}}</li>
+          </div>
 
         </label>
         <div class="row">
-          <button type="submit" class="  button button-block button-calm" >צור משימה</button>
+          <button type="submit" class="  button button-block button-calm" >הוסף לקוח</button>
         </div>
       </div>
 

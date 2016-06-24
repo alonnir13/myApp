@@ -4,9 +4,25 @@ angular.module('starter.controllers', [])
 
   .controller('DashCtrl', function ($scope) {
   })
-  .controller('DashboardController', function ($scope, filterFilter, $state, $ionicViewSwitcher, $http) {
+  .controller('DashboardController', function ($scope, $rootScope, $ionicPopup, SearchService, $ionicPlatform, filterFilter, $state, $ionicViewSwitcher, $http) {
+    $ionicPlatform.registerBackButtonAction(function() {
+      if($state.$current.name == "dashboard"){
+        navigator.app.exitApp();
+      } else $rootScope.$ionicGoBack();
+    }, 100);
+    $scope.show = true;
+    $scope.streets = [];
+    $scope.searchText = "";
     $scope.dashboard = {swiper: false, slider: false, activeIndexView: 2};
     $scope.model = "";
+    $scope.searchBar = function(){
+      console.log("search text " );
+      $scope.searchText = $("#searchText").val();
+      //$scope.searchText.push($("#searchText").val());
+      //$scope.$apply();
+      $scope.show = true;
+
+    };
     $scope.getSt = function() {
       $http.get('img/BS_streets.txt')
         .then(function (res) {
@@ -15,11 +31,37 @@ angular.module('starter.controllers', [])
         });
       return $scope.streets;
     }
-    $scope.filterStreets=function(){
+    $scope.chosesearch = function (text) {
+      //$scope.searchText = text;
+      console.log("street"+text);
+      $("#searchText").val(text);
+      $scope.searchText = text;
+$scope.show = false;
 
-      $scope.filteredArray = filterFilter($scope.streets, {street:$scope.address_filter});
-    };
+    }
+$scope.fastSearch = function () {
+  if($scope.searchText){
+    $scope.results = [];
+    console.log("result before: " + SearchService.results());
+      console.log("submit: " + $scope.searchText);
+      SearchService.search($scope.searchText).success(function () {
+        console.log("Good!!!!");
+        $rootScope.results = [];
+        $rootScope.results = SearchService.results();
+        $state.go('search-result');
+      }).error(function () {
+        var alertPop = $ionicPopup.alert({
+          title: 'החיפוש נכשל',
+          template: 'בעיית חיבור לשרת'
+        })
+        console.log("Very bad!!!!");
+      });
 
+      console.log("result after: " + JSON.stringify(SearchService.results()));
+
+  }
+  console.log($scope.searchText);
+}
     $scope.changeState = function () {
       console.log("search");
       //$ionicViewSwitcher.nextDirection('up');
@@ -48,8 +90,10 @@ angular.module('starter.controllers', [])
       $scope.swiper.slideTo(indexSlide);
     };
   })
-  .controller('ChatsCtrl', function ($scope, Chats, $ionicModal, $ionicPopup, $ionicTabsDelegate, localStorageService, $location) {
-
+  .controller('ChatsCtrl', function ($scope, $ionicPlatform, Chats, $ionicModal, $ionicPopup, $ionicTabsDelegate, localStorageService, $location) {
+    $ionicPlatform.registerBackButtonAction(function() {
+      navigator.app.exitApp();
+    });
     var contactData = "contactStorage";
     $scope.phone = function ( path ) {
       console.log("path: " + path);
@@ -142,10 +186,11 @@ angular.module('starter.controllers', [])
 
   .controller('assetCtrl', function ($scope, $state, $ionicModal, localStorageService, $stateParams) {
     var clientStorage = "clientStorage";
+    var contactData = "contactStorage";
     var clients = [];
     $scope.asset = getAsset($stateParams.assetid);
     var client = {};
-
+$scope.contacts = localStorageService.get(contactData);
     function getAsset(id) {
       var data = localStorageService.get(favStorage);
       for (var i = 0; i < data.length; i++) {
@@ -187,9 +232,10 @@ angular.module('starter.controllers', [])
   })
 
   .controller('UploadCtrl', function ($scope, UploadAssetService, $ionicPopup, $state) {
+    $scope.checkbox = {};
     $scope.uploadAsset = function () {
       var str = $("#upform").serialize();
-      console.log("submit: " + str.toString()+ "   "+ $scope.isCheck);
+      console.log("submit: " + str.toString()+ "   "+ $scope.checkbox.aircon);
 
       UploadAssetService.uploadAsset(str.toString()).success(function () {
         var alertPop = $ionicPopup.alert({
@@ -256,7 +302,7 @@ angular.module('starter.controllers', [])
 
   })
   .controller('SearchResultCtrl', function ($scope, $state, SearchService, $rootScope) {
-    $scope.results = $rootScope.results;
+    $scope.results = $rootScope.results[0];
     //$scope.results=[{neighborhood: "some", type: "bil"}];
     console.log("results in scope: " + JSON.stringify($scope.results))
   })

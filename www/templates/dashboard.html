@@ -1,17 +1,18 @@
-<ion-view >
+<ion-view ng-controller="DashboardController">
 
   <!--<label class="item item-input" class="col">-->
     <!--<i class="icon ion-search placeholder-icon" ng-click="changeState()" ></i>-->
   <!--</label>-->
 
-  <ion-nav-buttons ng-controller="DashboardController" side="right">
+  <ion-nav-buttons  side="right">
 
     <!--<button class="button icon ion-search" ng-click="changeState()">-->
     <!--</button>-->
     <div class="bar bar-header item-input-inset" class="row">
       <label class="item item-input" class="row" style="background: none;">
-      <i class="icon ion-search" ></i>
-        <input type="search" placeholder="חפש כתובת" autofocus keyboard-attach style="border: none; box-shadow: none;">
+     <button class="button" ng-click="fastSearch()"><i class="icon ion-search" ></i></button>
+        <input ng-click=""  ng-model="searchText2" ng-change="searchBar()" id="searchText" type="search" placeholder="חפש כתובת" autofocus keyboard-attach style="border: none; box-shadow: none;">
+        <!--<ion-search placeholder="Buscar nombre" min-length="1" model="search"></ion-search>-->
 
         <!--<input ion-autocomplete class="ion-autocomplete" autocomplete="off"  items-method="getSt()"  item-view-value-key="street" readonly="readonly" ng-model-options="{debounce:1000}" max-selected-items="1" item-value-key="street" ng-model="model" type="txet" placeholder="חפש כתובת" autofocus keyboard-attach style="border: none; box-shadow: none;">-->
     </label>
@@ -67,8 +68,18 @@
     <!--</ion-tab>-->
     <!--</ion-tabs>-->
 
-  <ion-content>
-    <div style="z-index: 999; position: absolute;">njgigogogog</div>
+  <ion-content  >
+    <div ng-init="getSt()"></div>
+
+    <div class="list" data-ng-show="show" ng-if="searchText" ng-repeat="street in streets | filter:searchText">
+      <li class="item"  ng-click="chosesearch(street.street);">{{street.street}}</li>
+    </div>
+    <!--<table id="searchTextResults">-->
+      <!--<tr><th>בחר רחוב</th><</tr>-->
+      <!--<tr ng-repeat="street in streets | filter:searchText">-->
+        <!--<td ng-click="chosesearch({{street.street}})">{{street.street}}</td>-->
+      <!--</tr>-->
+    <!--</table>-->
     <ion-scroll direction="y" ng-show="data.length > 0">
       <ul class="list">
         <li class="item" ng-repeat="c in filteredArray">

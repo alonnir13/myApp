@@ -18,7 +18,7 @@ angular.module('starter.services', ['ionic', 'LocalStorageModule'])
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
           },
-          params: {Address: "דב הוז"}
+          params: {Street: data}
         }
 
 
@@ -106,6 +106,16 @@ angular.module('starter.services', ['ionic', 'LocalStorageModule'])
   .service('UploadAssetService', function($q, $http, localStorageService){
     return {
       uploadAsset: function (str) {
+        var checkboxdata = "";
+        if(!str.includes("AirCon")){
+          checkboxdata = "&AirCon=";
+        }
+        if(!str.includes("Elevator")){
+          checkboxdata += "&Elevator=";
+        }
+        if(!str.includes("Mamad")){
+          checkboxdata += "&Mamad=";
+        }
         var deferred = $q.defer();
         var promise = deferred.promise;
         var req = {
@@ -115,7 +125,7 @@ angular.module('starter.services', ['ionic', 'LocalStorageModule'])
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
           },
-          data: str  + "&Agent=" + localStorageService.get("TUserName")
+          data: str  + "&Agent=" + localStorageService.get("TUserName")+checkboxdata
         }
 
 
