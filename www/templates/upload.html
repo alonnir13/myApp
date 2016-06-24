@@ -2,32 +2,35 @@
   <ion-content  style="top: 1%; overflow: hidden;">
     <form role="form" id="upform">
 
+   <div class="row" style="margin-top: 8%;">
+      <label  class="col-50" style=" margin-bottom: 5%;">
 
-      <label class="row" style="margin-top: 8%; margin-bottom: 5%;">
+        <input class="input_set" type="text" name="Address" placeholder="רחוב"  class="input_set">
 
-        <input class="input_set" type="text" name="Address" placeholder="רחוב" class="col-50" class="input_set">
+</label>
 
-
-
-
-        <input  class="input_set"  type="text" name="Neighborhood" placeholder="שכונה " class="col-50" class="input_set">
+<label class="col-50">
+        <input  class="input_set"  type="text" name="Neighborhood" placeholder="שכונה "  class="input_set">
 
 
       </label>
 
+   </div>
 
 
-      <label class="row" style="margin-bottom: 6%;">
-        <div class="col-50" >
+      <div class="row" style="margin-top: 8%;">
+      <label style="margin-bottom: 6%;" class="col-50" >
+
           <select  name="Type" >
 
             <option >בית פרטי</option>
             <option >דירה</option>
             <option >פנטהאוז</option>
           </select>
-        </div>
 
-        <div class="col-50" >
+        </label>
+       <label class="col-50" >
+        <div >
           <select >
             <option >נמכר</option>
             <option >בשיווק</option>
@@ -36,37 +39,43 @@
           </select>
         </div>
       </label>
-
-
-      <label class="row" style="margin-bottom: 25px;">
-        <div class="col-30">
-          <input name="Rooms" type="text" placeholder="מס' חדרים "  class="input_set">
         </div>
-        <div class="col-30">
+
+      <div class="row"  style="margin-bottom: 25px;">
+      <label class="col-30">
+
+          <input name="Rooms" type="text" placeholder="מס' חדרים "  class="input_set">
+
+        </label>
+
+        <label class="col-30">
+
 
           <input type="text" placeholder="מס' בית" class="input_set">
-        </div>
+        </label>
 
 
-        <div class="col-30">
+        <label class="col-30">
           <input name="Floor"  type="text" placeholder="קומה"  class="input_set">
+        </label>
+
+      </label>
         </div>
 
-      </label>
+     <div class="row"  style="margin-top: 8%; margin-bottom: 5%;">
+      <label class="col-50">
 
+        <input class="input_set" type="text" name="Price" placeholder="מחיר" class="input_set">
 
-      <label class="row" style="margin-top: 8%; margin-bottom: 5%;">
+</label>
 
-        <input class="input_set" type="text" name="Price" placeholder="מחיר"class="col-50" class="input_set">
-
-
-
-
-        <input  class="input_set"  type="text" placeholder=" מ'ר" class="col-50" class="input_set">
+<label class="col-50">
+        <input  class="input_set"  type="text" placeholder=" מ'ר"  class="input_set">
 
 
 
       </label>
+     </div>
 
 
 
