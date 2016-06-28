@@ -1,15 +1,17 @@
-<ion-view  name="login-view">
-  <ion-content id="login_bg"   class="padding" style="top: 1%; padding-top: 40%" >
+<ion-view name="login-view" style="bottom:0%; text-align: center;">
+  <ion-content id="login_bg"   style="top: 1%; padding-top: 35%" >
 
     <div class="list list-inset" >
 
-      <label class="item item-input input-login">
+      <label class="item item-input input-login col">
         <input type="text" placeholder="שם משתמש" ng-model="data.username">
       </label>
       <label class="item item-input">
         <input type="password" placeholder="סיסמא" ng-model="data.password">
       </label>
     </div>
-    <button class="button button-block button-positive" ng-click="login()">Login</button>
+    <div class="col">
+    <button class="button button-block button-positive" ng-click="login()" style="background-color: #11c1f3;">התחבר</button>
+    </div>
   </ion-content>
 </ion-view>
