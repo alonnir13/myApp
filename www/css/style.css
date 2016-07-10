@@ -6,8 +6,13 @@ ion-slides {
 
 
 }
-
-
+.popup-head {
+  color: #AAAAAA;
+  font-weight: bold;
+}
+.popup-body {
+  text-align: center;
+}
 
 
 
@@ -332,7 +337,10 @@ ion-modal-view{
   background-color: #11c1f3; !important;
 }
 
-
+/* Added by Simon the king*/
+.item-content.activated, .activated {
+  background-color:rgba(255,255,255,0.9) !important;
+}
 .item{
 border: none;
   padding-left: 30px;

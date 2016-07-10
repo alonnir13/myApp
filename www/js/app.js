@@ -26,7 +26,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     $ionicConfigProvider.tabs.position('top');
   })
 
-.config(function (localStorageServiceProvider) {
+.config(function (localStorageServiceProvider, $httpProvider) {
+  //$httpProvider.defaults.withCredentials = true;
+  //$httpProvider.interceptors.push(function() {
+  //  return {
+  //    request: function(req) {
+  //      // Set the `Authorization` header for every outgoing HTTP request
+  //      req.headers.Authorization =
+  //        'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtb3NoZTEyMyIsImNyZWF0ZWQiOjE0NjgxNzYyNjUxNjksImV4cCI6MTQ2ODc4MTA2NX0.eNLGtgrsqbp8-a-vUT8-5pJfusfJ7_sR29e3-YdZqH1NIJb6kpFK42mE2NHiXkK3YEaJgE2JUDSxeJhe-5nkTQ';
+  //      return req;
+  //    }
+  //  };
+  //});
   localStorageServiceProvider
     .setPrefix('data-provider');
 })
@@ -89,5 +100,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/dashboard');
+})
+  .run(function ($rootScope, $state, AuthService) {
+    $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {
 
-});
+      if (!AuthService.isAuthenticated()) {
+        if (next.name !== 'login') {
+          event.preventDefault();
+          $state.go('login');
+        }
+      }
+    });
+  });

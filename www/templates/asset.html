@@ -5,14 +5,14 @@
     <div class="asset_details" class="row" style="padding: 5%;">
 
 
-      <h4 style=" font-size:1.1em; text-align: right">שם הסוכן: משה אטס</h4>
+      <p>סוכן: {{asset.usersByAgent.lastname}} {{asset.usersByAgent.firstname}} </p>
       <h4 style=" font-size:1.1em; text-align: right">בעל הנכס:</h4>
       <p>סוג הכנס: {{asset.type}}</p>
       <p>כתובת: {{asset.address}}</p>
       <p>מחיר: {{asset.price}} ש”ח</p>
       <p>מספר חדרים: {{asset.rooms}}</p>
       <p>מ”ר: {{asset.square}}</p>
-      <p>מס' בית:</p>
+      <p>מס' בית: {{asset.num_Address}}</p>
       <p>קומה:{{asset.floor}}</p>
       <p>בנוסף: מרפסת, מעלית, מיזוג, ממ”ד</p>
 
@@ -28,16 +28,18 @@
       <p style="margin-top: 15px; margin-bottom: -15px; text-align: right; margin-right: 5%;">לקוחות המעוניינים בנכס:</p>
       <button class="contacts_apt_add button button-clear " ng-click="openClientModal()"><i class="ion-plus-round"></i></button>
       <div class="col">
-     <div class="row asset_client" style="border-radius: 10px; opacity: 0.8;">
+        <div ng-repeat="client in clients track by $index" class="row asset_client" style="border-radius: 10px; opacity: 0.8;">
 
-       <p class="client_name">משה אטס</p>
-       <button side="left" style="margin-left: 5%; color:#33cd5f;"><i class=" ion-ios-telephone"></i> </button>
 
-       <button side="left"><i class=" ion-trash-a"></i> </button>
+       <p class="client_name">{{client.name}}</p>
+       <button  ng-click="phone({{client.phone}})" side="left" style="margin-left: 5%; color:#33cd5f;"><i class=" ion-ios-telephone"></i> </button>
 
+       <button ng-click="removeClient($index)" side="left"><i class=" ion-trash-a"></i> </button>
 
 
      </div>
+
+
       </div>
 
     </div>

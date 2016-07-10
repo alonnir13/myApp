@@ -2,10 +2,10 @@
   <ion-content ng-controller="SearchResultCtrl" id="ar_profile">
 
     <!--profile-->
-    <ion-item class="row" ng-repeat="data in results" style="padding-right: 0px;">
+    <ion-item class="row" ng-repeat="data in results" href="#/asset/{{data.assetid}} on-" style="border-radius:10px; padding-right: 0px;margin-top: 10px; opacity: 0.9; text-align: right;">
       <div class="results_wr">
       <article class="col result_item">
-        <p>{{data.agent}}סוכן:</p>
+        <p>סוכן: {{data.usersByAgent.lastname}} {{data.usersByAgent.firstname}} </p>
         <p>סוג הנכס: {{data.type}}</p>
         <p>כתובת: {{data.street}}</p>
         <p>מספר חדרים: {{data.rooms}}</p>

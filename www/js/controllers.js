@@ -5,8 +5,8 @@ angular.module('starter.controllers', [])
   .controller('DashCtrl', function ($scope) {
   })
   .controller('DashboardController', function ($scope, $rootScope, $ionicPopup, SearchService, $ionicPlatform, filterFilter, $state, $ionicViewSwitcher, $http) {
-    $ionicPlatform.registerBackButtonAction(function() {
-      if($state.$current.name == "dashboard"){
+    $ionicPlatform.registerBackButtonAction(function () {
+      if ($state.$current.name == "dashboard") {
         navigator.app.exitApp();
       } else $rootScope.$ionicGoBack();
     }, 100);
@@ -15,15 +15,14 @@ angular.module('starter.controllers', [])
     $scope.searchText = "";
     $scope.dashboard = {swiper: false, slider: false, activeIndexView: 2};
     $scope.model = "";
-    $scope.searchBar = function(){
-      console.log("search text " );
+    $scope.searchBar = function () {
       $scope.searchText = $("#searchText").val();
       //$scope.searchText.push($("#searchText").val());
       //$scope.$apply();
       $scope.show = true;
 
     };
-    $scope.getSt = function() {
+    $scope.getSt = function () {
       $http.get('img/BS_streets.txt')
         .then(function (res) {
           $scope.streets = res.data;
@@ -33,35 +32,37 @@ angular.module('starter.controllers', [])
     }
     $scope.chosesearch = function (text) {
       //$scope.searchText = text;
-      console.log("street"+text);
+      console.log("street" + text);
       $("#searchText").val(text);
       $scope.searchText = text;
-$scope.show = false;
-
+      $scope.show = false;
+      document.getElementById('searchText').focus();
+      window.cordova.plugins.Keyboard.show();
     }
-$scope.fastSearch = function () {
-  if($scope.searchText){
-    $scope.results = [];
-    console.log("result before: " + SearchService.results());
-      console.log("submit: " + $scope.searchText);
-      SearchService.search($scope.searchText).success(function () {
-        console.log("Good!!!!");
-        $rootScope.results = [];
-        $rootScope.results = SearchService.results();
-        $state.go('search-result');
-      }).error(function () {
-        var alertPop = $ionicPopup.alert({
-          title: 'החיפוש נכשל',
-          template: 'בעיית חיבור לשרת'
-        })
-        console.log("Very bad!!!!");
-      });
+    $scope.fastSearch = function () {
+      if ($scope.searchText) {
+        $scope.show = false;
+        $scope.results = [];
+        console.log("result before: " + SearchService.results());
+        console.log("submit: " + $scope.searchText);
+        SearchService.search($scope.searchText).success(function () {
+          console.log("Good!!!!");
+          $rootScope.results = [];
+          $rootScope.results = SearchService.results();
+          $state.go('search-result');
+        }).error(function () {
+          var alertPop = $ionicPopup.alert({
+            title: 'החיפוש נכשל',
+            template: 'אנא בדוק שהכתובת תקינה'
+          })
+          console.log("Very bad!!!!");
+        });
 
-      console.log("result after: " + JSON.stringify(SearchService.results()));
+        console.log("result after: " + JSON.stringify(SearchService.results()));
 
-  }
-  console.log($scope.searchText);
-}
+      }
+      console.log($scope.searchText);
+    }
     $scope.changeState = function () {
       console.log("search");
       //$ionicViewSwitcher.nextDirection('up');
@@ -91,14 +92,14 @@ $scope.fastSearch = function () {
     };
   })
   .controller('ChatsCtrl', function ($scope, $ionicPlatform, Chats, $ionicModal, $ionicPopup, $ionicTabsDelegate, localStorageService, $location) {
-    $ionicPlatform.registerBackButtonAction(function() {
+    $ionicPlatform.registerBackButtonAction(function () {
       navigator.app.exitApp();
     });
     var contactData = "contactStorage";
-    $scope.phone = function ( path ) {
+    $scope.phone = function (path) {
       console.log("path: " + path);
       //$location.url('tel:'+path);
-      window.location.href = 'tel:'+path;
+      window.location.href = 'tel:' + path;
     };
     $scope.contacts = [];
 
@@ -126,7 +127,7 @@ $scope.fastSearch = function () {
         $scope.contact = {};
         //close new contact modal
         $scope.newContactModal.hide();
-      }else {
+      } else {
         var alertPop = $ionicPopup.alert({
           title: 'תקלה',
           template: 'אחד השדות חסר'
@@ -184,13 +185,16 @@ $scope.fastSearch = function () {
   })
 
 
-  .controller('assetCtrl', function ($scope, $state, $ionicModal, localStorageService, $stateParams) {
-    var clientStorage = "clientStorage";
+  .controller('assetCtrl', function ($scope, $rootScope, $state, $ionicModal, localStorageService, $stateParams) {
+    var clientStorage = "clientStorage.";
     var contactData = "contactStorage";
-    var clients = [];
-    $scope.asset = getAsset($stateParams.assetid);
+    //var interClient = "interestedStorage";
+    var assetId = $stateParams.assetid;
+    $scope.asset = getAsset(assetId);
+    $scope.clients = getInterested(assetId);
+    var totalClients = [];
     var client = {};
-$scope.contacts = localStorageService.get(contactData);
+    $scope.contacts = localStorageService.get(contactData);
     function getAsset(id) {
       var data = localStorageService.get(favStorage);
       for (var i = 0; i < data.length; i++) {
@@ -198,9 +202,27 @@ $scope.contacts = localStorageService.get(contactData);
           return data[i];
         }
       }
-
+      console.log("searchctl: " + $rootScope.results[0]);
+      var res = $rootScope.results[0];
+      for (i = 0; i < res.length; i++) {
+        if (res[i].assetid === parseInt(id)) {
+          return res[i];
+        }
+      }
     }
-
+    $scope.phone = function (path) {
+      console.log("path: " + path);
+      //$location.url('tel:'+path);
+      window.location.href = 'tel:' + path;
+    };
+    function getInterested(id){
+      totalClients = localStorageService.get(clientStorage + id);
+      if(totalClients){
+      return totalClients;
+      }else {
+        return totalClients = [];
+      }
+    }
     $ionicModal.fromTemplateUrl('templates/add-interested-client-modal.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -208,13 +230,13 @@ $scope.contacts = localStorageService.get(contactData);
       $scope.clientModal = modal;
     });
 
-    $scope.getClients = function () {
-      if (localStorageService.get(clientStorage)) {
-        $scope.clients = localStorageService.get(clientStorage);
-      } else {
-        $scope.clients = [];
-      }
-    }
+    //$scope.getClients = function () {
+    //  if (localStorageService.get(clientStorage)) {
+    //    $scope.clients = localStorageService.get(clientStorage);
+    //  } else {
+    //    $scope.clients = [];
+    //  }
+    //}
     $scope.closeClientModal = function () {
       $scope.clientModal.hide();
     }
@@ -223,11 +245,28 @@ $scope.contacts = localStorageService.get(contactData);
     }
 
     $scope.createClient = function () {
-      $scope.clients.push($scope.client);
-      localStorageService.set(clientStorage, $scope.clients);
-      $scope.client = {};
-      //close new contact modal
+      var p =[];
+      var clientString = JSON.stringify($scope.clients);
+      for (var i = 0; i < $scope.contacts.length; i++) {
+          var item = $scope.contacts[i];
+          if (item.checked && !clientString.includes(item.phone)) {
+            p.push(item)
+            $scope.clients.push(item);
+
+          }
+      }
+      totalClients = p;
+        console.log("P: " +JSON.stringify(p));
+        console.log("P has: " +JSON.stringify(p).includes("42242"));
+      //$scope.clients.push(JSON.stringify(p));
+      localStorageService.set(clientStorage+assetId, $scope.clients);
+      //$scope.client = {};
+      ////close new contact modal
       $scope.clientModal.hide();
+    }
+    $scope.removeClient = function(index){
+      $scope.clients.splice(index, 1);
+      localStorageService.set(clientStorage+assetId, $scope.clients);
     }
   })
 
@@ -235,7 +274,7 @@ $scope.contacts = localStorageService.get(contactData);
     $scope.checkbox = {};
     $scope.uploadAsset = function () {
       var str = $("#upform").serialize();
-      console.log("submit: " + str.toString()+ "   "+ $scope.checkbox.aircon);
+      console.log("submit: " + str.toString() + "   " + $scope.checkbox.aircon);
 
       UploadAssetService.uploadAsset(str.toString()).success(function () {
         var alertPop = $ionicPopup.alert({
@@ -252,25 +291,32 @@ $scope.contacts = localStorageService.get(contactData);
       });
     }
   })
-  .controller('LoginCtrl', function ($scope, LoginService, $ionicPopup, $state, localStorageService, $rootScope) {
+  .controller('LoginCtrl', function ($scope, LoginService, AuthService, $http, $ionicPopup, $state, localStorageService, $rootScope) {
     $scope.data = {};
     $scope.fav = [];
-    if (localStorageService.get("isLoggedIn")) {
-      $state.go('dashboard');
-    }
+    //if (localStorageService.get("isLoggedIn")) {
+    //  $state.go('dashboard');
+    //}
     console.log("log before: " + LoginService.favorites());
     $scope.login = function () {
       console.log("LOGIN user: " + $scope.data.username + " - PW: " + $scope.data.password);
-      LoginService.loginUser($scope.data.username, $scope.data.password, localStorageService).success(function (data) {
+      AuthService.login($scope.data.username, $scope.data.password).then(function (data) {
+        $http.defaults.headers.common.Authorization = AuthService.authToken;
         localStorageService.set("TUserName", $scope.data.username);
         localStorageService.set("TPass", $scope.data.password);
+        LoginService.getAssetsByAgent($scope.data.username, AuthService.authToken()).then(function(){
         $rootScope.fav = [];
         $rootScope.fav = LoginService.favorites();
         localStorageService.set(favStorage, $rootScope.fav[0]);
         localStorageService.set("isLoggedIn", true);
         console.log("log after: " + $rootScope.fav);
-        $state.go('dashboard');
-      }).error(function (data) {
+        $state.go('dashboard');}, function(){
+          var alertPopup = $ionicPopup.alert({
+            title: 'Login failed!',
+            template: 'Please check your credentials!'
+          });
+        })
+      }, function (data) {
         var alertPopup = $ionicPopup.alert({
           title: 'Login failed!',
           template: 'Please check your credentials!' + data

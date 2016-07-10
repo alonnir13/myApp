@@ -10,10 +10,11 @@
     <!--</button>-->
     <div class="bar bar-header item-input-inset" class="row">
       <label class="item item-input" class="row" style="background: none;">
-     <button class="button" ng-click="fastSearch()"><i class="icon ion-search" ></i></button>
-        <input ng-click=""  ng-model="searchText2" ng-change="searchBar()" id="searchText" type="search" placeholder="חפש כתובת" autofocus keyboard-attach style="border: none; box-shadow: none;">
+     <i class="icon ion-search" ></i>
+       <form ng-submit="fastSearch()">
+        <input  ng-model="searchText2" ng-change="searchBar()" id="searchText" type="search" placeholder="חפש כתובת" autofocus keyboard-attach style="border: none; box-shadow: none;">
         <!--<ion-search placeholder="Buscar nombre" min-length="1" model="search"></ion-search>-->
-
+       </form>
         <!--<input ion-autocomplete class="ion-autocomplete" autocomplete="off"  items-method="getSt()"  item-view-value-key="street" readonly="readonly" ng-model-options="{debounce:1000}" max-selected-items="1" item-value-key="street" ng-model="model" type="txet" placeholder="חפש כתובת" autofocus keyboard-attach style="border: none; box-shadow: none;">-->
     </label>
 
@@ -71,7 +72,7 @@
   <ion-content  >
     <div ng-init="getSt()"></div>
 
-    <div class="list" data-ng-show="show" ng-if="searchText" ng-repeat="street in streets | filter:searchText">
+    <div class="list" data-ng-show="show" ng-if="searchText" ng-repeat="street in streets | filter:searchText | limitTo:5">
       <li class="item"  ng-click="chosesearch(street.street);">{{street.street}}</li>
     </div>
     <!--<table id="searchTextResults">-->
@@ -141,13 +142,13 @@
         <div data-ng-controller="ProfileCtrl">
         <ion-content ng-init="getFav()" id="ar_profile">
 
-          <ion-item  class="row" ng-repeat="data in favor track by $index" href="#/asset/{{data.assetid}} on-" style="border-radius:10px; padding-right: 0px;margin-top: 10px; opacity: 0.9; text-align: right;">
+          <ion-item  class="row" ng-repeat="data in favor track by $index" href="#/asset/{{data.assetid}}" style="border-radius:10px; padding-right: 0px;margin-top: 10px; opacity: 0.9; text-align: right;">
             <div class="results_wr">
 
 
-                <p>{{data.agent}}סוכן:</p>
+                <p>סוכן: {{data.usersByAgent.lastname}} {{data.usersByAgent.firstname}} </p>
                 <p>סוג הנכס: {{data.type}}</p>
-                <p>כתובת: {{data.address}}</p>
+                <p>כתובת:  {{data.num_Address}} {{data.address}} </p>
                 <p>מספר חדרים: {{data.rooms}}</p>
                 <p> מחיר: {{data.price }} ש"ח</p>
                 <p>מס' בית:</p>

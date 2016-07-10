@@ -2,23 +2,27 @@
 
 
   <ion-content style="overflow: hidden;">
-    <form ng-submit="createClient()">
+    <!--<form ng-submit="createClient()">-->
       <div class="list list-inset" style="border-radius: 8px;">
         <button class="button button-icon" ng-click="closeClientModal()" style="margin-right: 3%;">
           <i class="icon ion-android-close"></i>
         </button>
 
-        <label class="col item item-input" style="height: 200px;">
-          <div class="list"  ng-repeat="contact in contacts">
-            <li class="item"  ng-click="">{{contact.name}}</li>
-          </div>
-
-        </label>
+        <!--<label class="col item item-input" style="height: 200px;">-->
+          <!--<div class="list"  ng-repeat="contact in contacts">-->
+            <!--<li class="item"  ng-click="" multiple="true">{{contact.name}}</li>-->
+          <!--</div>-->
+          <ion-checkbox type="checkbox" ng-repeat="field in contacts"
+                 ng-model="field.checked"
+                 ng-checked="field.checked">
+          {{ field.name }}
+          </ion-checkbox>
+        <!--</label>-->
         <div class="row">
-          <button type="submit" class="  button button-block button-calm" >הוסף לקוח</button>
+          <button type="submit" ng-click="createClient()" class="  button button-block button-calm" >הוסף לקוח</button>
         </div>
       </div>
 
-    </form>
+    <!--</form>-->
   </ion-content>
 </ion-modal-view>
