@@ -9,16 +9,20 @@ angular.module('starter.services', ['ionic', 'LocalStorageModule'])
     }
     //return {
       function doSearch(data) {
+        var hasNumber = /\d/;
+        var numAddress = data.replace( /^\D+/g, '');
+console.log("num: " + numAddress);
         var deferred = $q.defer();
         var promise = deferred.promise;
         var req = {
           method: 'GET',
-          url: 'http://ec2-52-38-209-139.us-west-2.compute.amazonaws.com/search/searchAssetByAddress',
+          url: 'http://ec2-52-38-209-139.us-west-2.compute.amazonaws.com/api/search/searchAssetByAddress',
           //dataType: "json",
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
           },
-          params: {Street: data}
+          params: {Street: data,
+         Num_Address: numAddress }
         }
 
 
@@ -55,35 +59,35 @@ angular.module('starter.services', ['ionic', 'LocalStorageModule'])
   .factory('LoginService', function($q, $http) {
     var fav = [];
     return {
-      loginUser: login,
+      getAssetsByAgent: getAssetsByAgent,
       favorites: function() {
         return fav;
       }
 
     }
-       function login(name, pw, localStorageService) {
+       function getAssetsByAgent(name, token) {
         var deferred = $q.defer();
+         console.log("asset token " + token)
         var promise = deferred.promise;
         var req = {
-          method: 'POST',
-          url: 'http://ec2-52-38-209-139.us-west-2.compute.amazonaws.com/login/validate_User',
+          method: 'GET',
+          url: 'http://appchii-env.us-west-2.elasticbeanstalk.com/api/login/getAssetsByAgent',
           //dataType: "json",
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-          },
-          data: "username="+name + "&password=" + pw
-        }
+            'Authorization': token,
+            'Content-Type': 'application/json'
+       },
+          params: {Username:name}
+        };
 
 
         $http(req).then(function(response){
             console.log("success  search" + JSON.stringify(response.data));
-            if(response.data != "") {
               deferred.resolve('Welcome ' + name + '!');
               fav = [];
               fav.push(response.data);
 
               console.log("fav pushed" + fav);
-            }else deferred.reject("Server problems");
           },
           function(response){
             deferred.reject('Wrong credentials.');
@@ -120,12 +124,12 @@ angular.module('starter.services', ['ionic', 'LocalStorageModule'])
         var promise = deferred.promise;
         var req = {
           method: 'POST',
-          url: 'http://ec2-52-38-209-139.us-west-2.compute.amazonaws.com/asset/addAsset',
+          url: 'http://ec2-52-38-209-139.us-west-2.compute.amazonaws.com/api/asset/addAsset',
           //dataType: "json",
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
           },
-          data: str  + "&Agent=" + localStorageService.get("TUserName")+checkboxdata
+          data: str  + "&Agent=" + localStorageService.get("TUserName")+checkboxdata+"&City=smartut"
         }
 
 
