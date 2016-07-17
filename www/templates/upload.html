@@ -6,12 +6,12 @@
       <div class="row" style="margin-top: 8%;">
         <label  class="col-50" >
 
-          <input class="input_set" type="text" name="Address" placeholder="בעל הנכס"  class="input_set">
+          <input class="input_set" type="text" name="Customer_Name" placeholder="בעל הנכס"  class="input_set">
 
         </label>
 
         <label class="col-50">
-          <input  class="input_set"  type="text" name="Neighborhood" placeholder="מס' בעל הנכס   "  class="input_set">
+          <input  class="input_set"  type="text" name="Customer_Tel" placeholder="מס' בעל הנכס   "  class="input_set">
 
 
         </label>
@@ -21,13 +21,41 @@
    <div class="row" style="margin-top: 8%;">
       <label  class="col-50">
 
-        <input class="input_set" type="text" name="Address" placeholder="רחוב"  class="input_set">
+        <input class="input_set" type="text" name="Street" placeholder="רחוב"  class="input_set">
 
 </label>
 
 <label class="col-50">
-        <input  class="input_set"  type="text" name="Neighborhood" placeholder="שכונה "  class="input_set">
-
+        <!--<input  class="input_set"  type="text" name="Neighborhood" placeholder="שכונה "  class="input_set">-->
+<select name="Neighborhood">
+  <option>בחר שכונה</option>
+  <option>שכונה א'</option>
+  <option>שכונה ב'</option>
+  <option>שכונה ג'</option>
+  <option>שכונה ד'</option>
+  <option>שכונה ה'</option>
+  <option>שכונה ו' הישנה</option>
+  <option>שכונה ו' החדשה</option>
+  <option>שכונה ט'</option>
+  <option>שכונה י"א</option>
+  <option>וילות מצדה</option>
+  <option>נאות לון</option>
+  <option>נווה זאב</option>
+  <option>נווה נוי</option>
+  <option>נחל עשן</option>
+  <option>העיר העתיקה</option>
+  <option>עמק שרה</option>
+  <option>קרית יהודית</option>
+  <option>רמב"ם</option>
+  <option>רמות</option>
+  <option >שיכון דרום</option>
+  <option>עומר</option>
+  <option>להבים</option>
+  <option>משמר הנגב</option>
+  <option>פלח 5</option>
+  <option>פלח 6</option>
+  <option>פלח 7</option>
+</select>
 
       </label>
 
@@ -39,18 +67,39 @@
 
           <select  name="Type" >
 
+            <option>סוג נכס</option>
             <option >בית פרטי</option>
+            <option>בית קרקע</option>
+            <option>דו משפחתי</option>
+            <option>דופלקס</option>
+            <option>דופלקס גג</option>
+            <option>דופלקס פנטהאוס</option>
             <option >דירה</option>
-            <option >פנטהאוז</option>
+            <option>דירה מחולקת</option>
+            <option>דירת גן</option>
+            <option>דירת קרקע</option>
+            <option>וילה</option>
+            <option>חנות</option>
+            <option>מבנה</option>
+            <option>מבנה תעשיה</option>
+            <option>מגרש</option>
+            <option>מיני פנטהאוס</option>
+            <option >פנטהאוס</option>
+            <option>מסחרי</option>
+            <option>משק</option>
+            <option>קוטג'</option>
+            <option>שטח</option>
           </select>
 
         </label>
        <label class="col-50" >
         <div >
-          <select >
+          <select name="Status">
+            <option>בחר סטטוס</option>
+            <option>פעיל</option>
             <option >נמכר</option>
-            <option >בשיווק</option>
-            <option >מושכר</option>
+            <option>הסתיימה בלעדיות</option>
+            <option >ירד ממכירה</option>
 
           </select>
         </div>
@@ -67,7 +116,7 @@
         <label class="col-30">
 
 
-          <input type="text" placeholder="מס' בית" class="input_set">
+          <input type="text" name="Num_Address" placeholder="מס' בית" class="input_set">
         </label>
 
 
@@ -86,7 +135,7 @@
 </label>
 
 <label class="col-50">
-        <input  class="input_set"  type="text" placeholder=" מ'ר"  class="input_set">
+        <input  class="input_set" name="Square"  type="text" placeholder=" מ'ר"  class="input_set">
 
 
 
@@ -120,7 +169,7 @@
 
 
       <label class="row" style="margin-bottom: 25px;">
-        <textarea  type="text" placeholder="כתוב תיאור קצר " class="col" class="input_set"></textarea>
+        <textarea  type="text" name="Details" placeholder="כתוב תיאור קצר " class="col" class="input_set"></textarea>
 
       </label>
 

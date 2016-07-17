@@ -141,6 +141,7 @@ angular.module('starter.controllers', [])
     }
 
     $scope.closeContactModal = function () {
+      //$('#contactForm').preventDefault();
       $scope.newContactModal.hide();
     }
     $scope.completeContact = function (index) {
@@ -275,20 +276,26 @@ angular.module('starter.controllers', [])
     $scope.uploadAsset = function () {
       var str = $("#upform").serialize();
       console.log("submit: " + str.toString() + "   " + $scope.checkbox.aircon);
-
-      UploadAssetService.uploadAsset(str.toString()).success(function () {
+      if(str.toString().includes("=&")){
         var alertPop = $ionicPopup.alert({
-          title: 'החיפוש צלח',
-          template: 'אחלה'
-        })
-        console.log("Very good!!!!");
-      }).error(function () {
-        var alertPop = $ionicPopup.alert({
-          title: 'החיפוש נכשל',
-          template: 'בעיית חיבור לשרת'
-        })
-        console.log("Very bad!!!!");
-      });
+          title: 'תקלה',
+          template: 'לפחות אחד השדות חסר'
+        });
+      }else {
+        UploadAssetService.uploadAsset(str.toString()).success(function () {
+          var alertPop = $ionicPopup.alert({
+            title: 'העלאה הסתיימה',
+            template: 'הנכס הועלה בהצלחה'
+          })
+          console.log("Very good!!!!");
+        }).error(function () {
+          var alertPop = $ionicPopup.alert({
+            title: 'העלאה נכשלה',
+            template: 'בעיית חיבור לשרת'
+          })
+          console.log("Very bad!!!!");
+        });
+      }
     }
   })
   .controller('LoginCtrl', function ($scope, LoginService, AuthService, $http, $ionicPopup, $state, localStorageService, $rootScope) {
@@ -330,7 +337,7 @@ angular.module('starter.controllers', [])
     $scope.submitSearch = function () {
       var str = $("#form").serialize();
       console.log("submit: " + str.toString());
-      SearchService.search(str).success(function () {
+      SearchService.searchByParams(str).success(function () {
         console.log("Good!!!!");
         $rootScope.results = [];
         $rootScope.results = SearchService.results();
@@ -339,7 +346,7 @@ angular.module('starter.controllers', [])
         var alertPop = $ionicPopup.alert({
           title: 'החיפוש נכשל',
           template: 'בעיית חיבור לשרת'
-        })
+        });
         console.log("Very bad!!!!");
       });
 
@@ -353,7 +360,7 @@ angular.module('starter.controllers', [])
     console.log("results in scope: " + JSON.stringify($scope.results))
   })
 
-  .controller('AccountCtrl', function ($scope, $ionicModal, localStorageService) {
+  .controller('AccountCtrl', function ($scope, $ionicModal, localStorageService, $ionicPopup) {
     var taskData = "taskStorage";
     //initialize the tasks scope with empty array
     $scope.tasks = [];
@@ -377,10 +384,12 @@ angular.module('starter.controllers', [])
       }
     }
     $scope.createTask = function () {
-      //creates a new task
-      $scope.tasks.push($scope.task);
-      localStorageService.set(taskData, $scope.tasks);
-      $scope.task = {};
+      if(!jQuery.isEmptyObject($scope.task)) {
+        //creates a new task
+        $scope.tasks.push($scope.task);
+        localStorageService.set(taskData, $scope.tasks);
+        $scope.task = {};
+      }
       //close new task modal
       $scope.newTaskModal.hide();
     }
@@ -388,11 +397,12 @@ angular.module('starter.controllers', [])
       //removes a task
       $scope.tasks.splice(index, 1);
       localStorageService.set(taskData, $scope.tasks);
-    }
+    };
 
-    $scope.closeTaskModal = function () {
+    $scope.closeTaskModal = function ($event) {
+      $event.preventDefault;
       $scope.newTaskModal.hide();
-    }
+    };
     $scope.completeTask = function (index) {
       //updates a task as completed
       if (index !== -1) {
@@ -400,7 +410,7 @@ angular.module('starter.controllers', [])
       }
 
       localStorageService.set(taskData, $scope.tasks);
-    }
+    };
     $scope.openTaskModal = function () {
       console.log("account");
       $scope.newTaskModal.show();
