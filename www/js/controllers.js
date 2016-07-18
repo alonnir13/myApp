@@ -271,8 +271,34 @@ angular.module('starter.controllers', [])
     }
   })
 
-  .controller('UploadCtrl', function ($scope, UploadAssetService, $ionicPopup, $state) {
+  .controller('UploadCtrl', function ($scope, UploadAssetService, $ionicPopup, $state, $http) {
     $scope.checkbox = {};
+    $scope.show = true;
+    $scope.streets = [];
+    $scope.searchText = "";
+    $scope.searchBar2 = function () {
+      $scope.searchText = $("#searchText2").val();
+      //$scope.searchText.push($("#searchText").val());
+      //$scope.$apply();
+      $scope.show = true;
+    };
+    $scope.getSt = function () {
+      $http.get('img/BS_streets.txt')
+        .then(function (res) {
+          $scope.streets = res.data;
+          console.log("json up ");
+        });
+      return $scope.streets;
+    }
+    $scope.chosesearch = function (text) {
+      //$scope.searchText = text;
+      console.log("street" + text);
+      $("#searchText2").val(text);
+      $scope.searchText2 = text;
+      $scope.show = false;
+      document.getElementById('searchText2').focus();
+      //window.cordova.plugins.Keyboard.show();
+    }
     $scope.uploadAsset = function () {
       var str = $("#upform").serialize();
       console.log("submit: " + str.toString() + "   " + $scope.checkbox.aircon);

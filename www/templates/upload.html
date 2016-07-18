@@ -1,5 +1,7 @@
 <ion-view view-title=  "העלה נכס" name="login-view" id="filter_bg">
   <ion-content  style="top: 1%; overflow: hidden;">
+    <div ng-init="getSt()"></div>
+
     <form role="form" id="upform">
 
 
@@ -20,8 +22,9 @@
 
    <div class="row" style="margin-top: 8%;">
       <label  class="col-50">
+        <input  ng-model="searchText2" ng-change="searchBar2()" id="searchText2" type="search" placeholder="רחוב"  style="border: none; box-shadow: none;">
+        <!--<input class="input_set" type="text" name="Street" placeholder="רחוב"  class="input_set">-->
 
-        <input class="input_set" type="text" name="Street" placeholder="רחוב"  class="input_set">
 
 </label>
 
@@ -60,7 +63,9 @@
       </label>
 
    </div>
-
+      <div class="list" data-ng-show="show" ng-if="searchText2" ng-repeat="street in streets | filter:searchText2 | limitTo:5">
+        <li class="item" style="margin: 0px;"  ng-click="chosesearch(street.street);">{{street.street}}</li>
+      </div>
 
       <div class="row">
       <label style="margin-bottom: 6%;" class="col-50" >

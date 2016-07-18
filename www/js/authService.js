@@ -55,7 +55,10 @@ console.log("token " + token);
       };
       return $http(req).then(function (response) {
         console.log("auth: " + response.data.token);
-        storeUserCredentials(response.data.token);
+        if(response.data.token != null){
+
+          storeUserCredentials(response.data.token);
+        }else isAuthenticated = false;
         return response.data;
       }, function (response) {
         console.log("auth-faild: " + response.data);
@@ -74,15 +77,15 @@ console.log("token " + token);
         url: 'http://ec2-52-38-209-139.us-west-2.compute.amazonaws.com/api/security/refresh',
         //dataType: "json",
         headers: {
+          'Accept': 'application/json',
           'Content-Type': 'application/json'
-        },
-        params: {
-          username: username
         }
       };
       $http(req).then(function(response){
         console.log("refreshed: " + response.data.token);
-        storeUserCredentials(JSON.stringify(response.data));
+        if(response.data.token != null) {
+          storeUserCredentials(response.data.token);
+        }else isAuthenticated = false;
         return response.data;
       }, function(response){
         console.log("refreshed error: " + response.data);
