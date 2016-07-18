@@ -3,7 +3,7 @@
  */
 angular.module('starter')
 
-  .service('AuthService', function ($q, $http) {
+  .service('AuthService', function ($q, $http, localStorageService) {
     var LOCAL_TOKEN_KEY = 'mTokenKey';
     var username = '';
     var isAuthenticated = false;
@@ -11,9 +11,10 @@ angular.module('starter')
 
     function loadUserCredentials() {
       var token = window.localStorage.getItem(LOCAL_TOKEN_KEY);
-      //username =
+      username = localStorageService.get('TUserName');
       if (token) {
         useCredentials(token);
+        refreshToken();
       }
     }
 
@@ -75,11 +76,21 @@ console.log("token " + token);
         headers: {
           'Content-Type': 'application/json'
         },
-        data: {
-          username: name
+        params: {
+          username: username
         }
       };
-      $http(req).then()
+      $http(req).then(function(response){
+        console.log("refreshed: " + response.data.token);
+        storeUserCredentials(JSON.stringify(response.data));
+        return response.data;
+      }, function(response){
+        console.log("refreshed error: " + response.data);
+        var token = window.localStorage.getItem(LOCAL_TOKEN_KEY);
+        storeUserCredentials(token);
+        return response.data;
+
+      });
     };
 
     loadUserCredentials();

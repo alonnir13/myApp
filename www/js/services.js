@@ -5,7 +5,8 @@ angular.module('starter.services', ['ionic', 'LocalStorageModule'])
       search: doSearch,
       results: function(){
         return searchResult;
-      }
+      },
+      searchByParams:searchByParams
     }
     //return {
       function doSearch(data) {
@@ -53,7 +54,79 @@ console.log("num: " + numAddress);
           return promise;
         }
         return promise;
+      };
+
+    function searchByParams(data){
+      var checkboxdata = "";
+      if(!data.includes("AirCon")){
+        checkboxdata = "&AirCon=";
       }
+      if(!data.includes("Elevator")){
+        checkboxdata += "&Elevator=";
+      }
+      if(!data.includes("Mamad")){
+        checkboxdata += "&Mamad=";
+      }
+      // neighborhood
+      if (data.includes("%D7%91%D7%97%D7%A8+%D7%A9%D7%9B%D7%95%D7%A0%D7%94")){
+        data = data.replace("%D7%91%D7%97%D7%A8+%D7%A9%D7%9B%D7%95%D7%A0%D7%94", "");
+        console.log("data: "+ data.replace("%D7%91%D7%97%D7%A8+%D7%A9%D7%9B%D7%95%D7%A0%D7%94", ""));
+      }
+      // status
+      if (data.includes("%D7%91%D7%97%D7%A8+%D7%A1%D7%98%D7%98%D7%95%D7%A1")){
+        data = data.replace("%D7%91%D7%97%D7%A8+%D7%A1%D7%98%D7%98%D7%95%D7%A1", "");
+      }
+      //type
+      if (data.includes("%D7%A1%D7%95%D7%92+%D7%A0%D7%9B%D7%A1")){
+        data = data.replace("%D7%A1%D7%95%D7%92+%D7%A0%D7%9B%D7%A1", "");
+      }
+      var jsonData = JSON.parse('{"' + decodeURI(data+"&City=beer sheva").replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"').replace(/\s/g,'') + '"}');
+      var deferred = $q.defer();
+      var promise = deferred.promise;
+      var req = {
+        method: 'POST',
+        url: 'http://ec2-52-38-209-139.us-west-2.compute.amazonaws.com/api/search/searchAssetsByParams',
+        //dataType: "json",
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        },
+        data:  data+"&City="+checkboxdata
+      }
+
+
+      $http(req).then(function(response){
+          console.log("success  search" + JSON.stringify(response.data));
+          if(response.data != "") {
+            deferred.resolve('Welcome ' + name + '!');
+            searchResult = [];
+            searchResult.push(response.data);
+          }else deferred.reject("Server problems");
+        },
+        function(response){
+          deferred.reject('Wrong credentials.');
+          console.log("Faild to search " + response.status + status + " data: " + req.data);
+
+        });
+      promise.success = function(fn) {
+        promise.then(fn);
+        return promise;
+      }
+      promise.error = function(fn) {
+        promise.then(null, fn);
+        return promise;
+      }
+      return promise;
+    }
+    function getUrlVars(url) {
+      var hash;
+      var myJson = {};
+      var hashes = url.slice(url.indexOf('?') + 1).split('&');
+      for (var i = 0; i < hashes.length; i++) {
+        hash = hashes[i].split('=');
+        myJson[hash[0]] = hash[1];
+      }
+      return myJson;
+    }
     //}
   })
   .factory('LoginService', function($q, $http) {
@@ -129,7 +202,7 @@ console.log("num: " + numAddress);
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
           },
-          data: str  + "&Agent=" + localStorageService.get("TUserName")+checkboxdata+"&City=smartut"
+          data: str  + "&Agent=" + localStorageService.get("TUserName")+checkboxdata+"&City=smartut" + "&NumOfFloors=0"
         }
 
 
