@@ -99,7 +99,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       controller: 'LoginCtrl'
     });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/dashboard');
+  $urlRouterProvider.otherwise('/login');
 })
   .run(function ($rootScope, $state, AuthService) {
     $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {

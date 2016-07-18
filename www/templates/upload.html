@@ -63,8 +63,8 @@
       </label>
 
    </div>
-      <div class="list" data-ng-show="show" ng-if="searchText2" ng-repeat="street in streets | filter:searchText2 | limitTo:5">
-        <li class="item" style="margin: 0px;"  ng-click="chosesearch(street.street);">{{street.street}}</li>
+      <div  class="list" data-ng-show="show" ng-if="searchText2" ng-repeat="street in streets | filter:searchText2 | limitTo:5" style="margin: 0px;">
+        <li class="item"   ng-click="chosesearch(street.street);">{{street.street}}</li>
       </div>
 
       <div class="row">
